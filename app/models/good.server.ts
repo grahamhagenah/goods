@@ -63,6 +63,20 @@ export function updateGood({ title, id }) {
   });
 }
 
+export function markComplete({ id }) {
+  return prisma.good.update({
+    data: { completed: true },
+    where: { id },
+  });
+}
+
+export function markIncomplete({ id }) {
+  return prisma.good.update({
+    data: { completed: false },
+    where: { id },
+  });
+}
+
 export function createGood({
   title,
   userId,

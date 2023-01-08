@@ -1,8 +1,9 @@
 import { json, redirect, ActionArgs} from "@remix-run/node";
-import { Form, useActionData } from "@remix-run/react";
+import { Form, useActionData, useTransition } from "@remix-run/react";
 import * as React from "react";
-import { updateGood, createGood } from "~/models/good.server";
+import { updateGood, createGood, deleteGood, markComplete, markIncomplete } from "~/models/good.server";
 import { requireUserId } from "~/session.server";
+import { useRef } from "react";
 
 export async function action({ request }: ActionArgs) {
   const userId = await requireUserId(request);
@@ -25,6 +26,15 @@ export async function action({ request }: ActionArgs) {
   else if(_action === "create") {
     await createGood({ title, userId });
   }
+  else if(_action === "delete") {
+    await deleteGood({ id });
+  }
+  else if(_action === "complete") {
+      await markComplete({ id });
+  }
+  else if(_action === "restore") {
+    await markIncomplete({ id });
+  }
   
   return null;
 }
@@ -32,6 +42,11 @@ export async function action({ request }: ActionArgs) {
 export default function NewGoodForm() {
   const actionData = useActionData<typeof action>();
   const titleRef = React.useRef<HTMLInputElement>(null);
+  const formRef = useRef();
+  let transition = useTransition();
+  let isAdding = 
+    transition.state === "submitting" && 
+    transition.submission.formData.get("_action") === "create"; 
 
   React.useEffect(() => {
     if (actionData?.errors?.title) {
@@ -39,8 +54,14 @@ export default function NewGoodForm() {
     }
   }, [actionData]);
 
+  React.useEffect(() => {
+    if (!isAdding) {
+      formRef.current?.reset();
+    }
+  }, [isAdding]);
+
   return (
-    <Form method="post">
+    <Form method="post" ref={formRef}>
       <div>
         <label className="flex w-full flex-col gap-1">
           <span>Title: </span>
