@@ -18,12 +18,7 @@ export function getGood({
 
 export function getGoodListItems({ userId }: { userId: User["id"] }) {
   return prisma.good.findMany({
-    where: {
-      AND: [
-        { userId },
-        { completed: false},
-      ],
-    },
+    where: { userId },
     select: { id: true, title: true },
     orderBy: { updatedAt: "desc" },
   });
@@ -38,13 +33,18 @@ export function getIncompleteGoodListItems({ userId }: { userId: User["id"] }) {
       ],
     },
     select: { id: true, title: true, completed: false, },
-    orderBy: { updatedAt: "desc" },
+    orderBy: { createdAt: "desc" },
   });
 }
 
 export function getCompletedGoodListItems({ userId }: { userId: User["id"] }) {
   return prisma.good.findMany({
-    where: { userId },
+    where: {
+      AND: [
+        { userId },
+        { completed: true},
+      ],
+    },
     select: { id: true, title: true, completed: true, },
     orderBy: { updatedAt: "desc" },
   });

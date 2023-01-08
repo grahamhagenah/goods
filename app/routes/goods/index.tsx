@@ -1,17 +1,16 @@
-import type { ActionArgs } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
+import { json, redirect, ActionArgs} from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import * as React from "react";
-import { useRef } from "react";
-
-import { createGood } from "~/models/good.server";
+import { updateGood, createGood } from "~/models/good.server";
 import { requireUserId } from "~/session.server";
 
 export async function action({ request }: ActionArgs) {
   const userId = await requireUserId(request);
-
   const formData = await request.formData();
+  let { _action, ...values } = Object.fromEntries(formData);
   const title = formData.get("title");
+  const id = formData.get("id");
+  const completed = formData.get("completed");
 
   if (typeof title !== "string" || title.length === 0) {
     return json(
@@ -20,12 +19,17 @@ export async function action({ request }: ActionArgs) {
     );
   }
 
-  const good = await createGood({ title, userId });
-
+  if(_action === "update") {
+    await updateGood({ title, id });
+  } 
+  else if(_action === "create") {
+    await createGood({ title, userId });
+  }
+  
   return null;
 }
 
-export default function NewGoodPage() {
+export default function NewGoodForm() {
   const actionData = useActionData<typeof action>();
   const titleRef = React.useRef<HTMLInputElement>(null);
 
@@ -36,15 +40,7 @@ export default function NewGoodPage() {
   }, [actionData]);
 
   return (
-    <Form
-      method="post"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 8,
-        width: "100%",
-      }}
-    >
+    <Form method="post">
       <div>
         <label className="flex w-full flex-col gap-1">
           <span>Title: </span>
@@ -53,9 +49,7 @@ export default function NewGoodPage() {
             name="title"
             className="flex-1 rounded-md border-2 border-blue-500 px-3 text-lg leading-loose"
             aria-invalid={actionData?.errors?.title ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.title ? "title-error" : undefined
-            }
+            aria-errormessage= { actionData?.errors?.title ? "title-error" : undefined }
           />
         </label>
         {actionData?.errors?.title && (
@@ -66,10 +60,7 @@ export default function NewGoodPage() {
       </div>
 
       <div className="text-right">
-        <button
-          type="submit"
-          className="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400"
-        >
+        <button name="_action" value="create" type="submit" className="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400">
           Save
         </button>
       </div>

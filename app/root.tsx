@@ -6,15 +6,8 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
+  ScrollRestoration
 } from "@remix-run/react";
-
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-
-import GoodsPage from "~/routes/goods";
 
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getUser } from "./session.server";
@@ -35,21 +28,9 @@ export async function loader({ request }: LoaderArgs) {
   });
 }
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        path: "/goods",
-      },
-    ],
-  },
-]);
-
 export default function App() {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-full" id="root">
       <head>
         <Meta />
         <Links />
@@ -59,7 +40,6 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
-        {/* <RouterProvider router={router} /> */}
       </body>
     </html>
   );
