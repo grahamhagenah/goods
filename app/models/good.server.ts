@@ -77,12 +77,7 @@ export function markIncomplete({ id }) {
   });
 }
 
-export function createGood({
-  title,
-  userId,
-}: Pick<Good, "title"> & {
-  userId: User["id"];
-}) {
+export function createGood({ title, userId }: Pick<Good, "title"> & { userId: User["id"]; }) {
   return prisma.good.create({
     data: {
       title,
