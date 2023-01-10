@@ -9,11 +9,16 @@ import {
   ScrollRestoration
 } from "@remix-run/react";
 
+import Navbar from "~/components/navbar"
 import tailwindStylesheetUrl from "./styles/tailwind.css";
+import styles from "~/styles/global.css";
 import { getUser } from "./session.server";
 
 export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
+  return [
+    { rel: "stylesheet", href: tailwindStylesheetUrl }, 
+    { rel: "stylesheet", href: styles }
+  ];
 };
 
 export const meta: MetaFunction = () => ({
@@ -35,7 +40,8 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-full">
+      <body className="max-w-2xl">
+        <Navbar />
         <Outlet />
         <ScrollRestoration />
         <Scripts />

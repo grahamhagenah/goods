@@ -110,18 +110,18 @@ function GoodItem ({ good }) {
     <li>
       <fetcher.Form method="post">
         <input type="hidden" name="id" value={good.id}></input>
-        <input
-          type="checkbox"
-          name="_action"
-          value={actionValue}
-          checked={checked}
-          onChange={(e) => fetcher.submit(e.target.form)}
-        />
+        <label className="form-control">
+          <input
+            type="checkbox"
+            name="_action"
+            value={actionValue}
+            checked={checked}
+            onChange={(e) => fetcher.submit(e.target.form)}
+          />
+        </label>
         <input name="title" type="text" defaultValue={good.title}></input>
-        <button name="_action" value="update" type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">Submit</button>
+        <button name="_action" value="update" type="submit">Update</button>
         <button name="_action" value="delete" type="submit" className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Delete</button>
-        <button name="_action" value="complete" type="submit" className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Complete</button>
-        <button name="_action" value="restore" type="submit" className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Restore</button>
       </fetcher.Form>
     </li>
 )}
