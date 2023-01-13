@@ -3,12 +3,12 @@ main {
   margin: 0 30%;
 }
 
-form {
+main form {
   background-color: #f6f6f6;
   border-radius: 10px;
 }
 
-form input {
+main form input {
   padding: 10px 20px;
 }
 
@@ -40,6 +40,7 @@ input[type="checkbox"]:checked::before {
 }
 
 .item-form .delete-button {
+  background-color: white;
   visibility: hidden;
   border-radius: 4px;
   position: absolute;
@@ -50,9 +51,8 @@ input[type="checkbox"]:checked::before {
   padding-right: .5rem;
   padding: 4px 15px;
   font-size: 14px;
-  background-color: transparent;
   color: #2b2b2b;
-  outline: 2px solid #2b2b2b;
+  font-weight: 500;
 }
 
 .item-form {
@@ -72,9 +72,21 @@ input[type="checkbox"]:checked::before {
   background-color: #f6f6f6;
   width: 100%;
   padding: 0.75rem 0 0.75rem 3rem;
+  border-radius: 0;
+  border-radius: 4px;
+}
+
+.goods-input:focus {
+  background-color: #fe99001f;
+}
+
+.empty-list {
+  border-radius: 4px;
+  background-color: #fe99001f;
 }
 
 .incomplete-goods,
 .completed-goods {
   min-height: 100px;
+  margin-bottom: 2rem;
 }

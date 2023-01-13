@@ -41,7 +41,8 @@ body {
     color: var(--c4);
 }
 
-#main-form {
+#main-form,
+.goods-input {
   outline-color: #fe9900;
 }
 

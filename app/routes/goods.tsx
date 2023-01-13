@@ -56,11 +56,11 @@ export default function GoodsPage() {
         <Outlet />
         <div className="">
           <div className="incomplete-goods">
+          <h2 className="text-lg opacity-50">Incomplete</h2>
             {data.incompleteGoodListItems.length === 0 ? (
-            <p className="p-4">No incomplete goods yet</p>
+            <p className="p-4 empty-list">Nothing here! Add some items using the field above.</p>
             ) : (
               <>
-                <h2 className="text-xl">Incomplete</h2>
                 <ol>
                   {data.incompleteGoodListItems.map((good) => (
                     <GoodItem key={good.id} good={good} />
@@ -68,30 +68,22 @@ export default function GoodsPage() {
                 </ol>
               </>
               )}
-              </div>
-              <div className="completed-goods">
-              {data.completedGoodListItems.length === 0 ? (
-                <p className="p-4">No complete goods yet</p>
-                ) : (
-                <>
-                  <h2 className="text-xl">Completed</h2>
-                  <ol>
-                    {data.completedGoodListItems.map((good) => (
-                      <GoodItem key={good.id} good={good} />
-                    ))}
-                  </ol>
-                </>
-                )}
-              </div>
-            <Form action="/logout" method="post">
-              <button
-              type="submit"
-              className="rounded bg-slate-600 py-2 px-4 text-blue-100 hover:bg-blue-500 active:bg-blue-600"
-              >
-              Logout
-              </button>
-            </Form>
-          </div>
+            </div>
+            <div className="completed-goods">
+            {data.completedGoodListItems.length === 0 ? (
+              <></>
+              ) : (
+              <>
+                <h2 className="text-lg opacity-50">Completed</h2>
+                <ol>
+                  {data.completedGoodListItems.map((good) => (
+                    <GoodItem key={good.id} good={good} />
+                  ))}
+                </ol>
+              </>
+              )}
+            </div>
+        </div>
       </main>
     </div>
   );
