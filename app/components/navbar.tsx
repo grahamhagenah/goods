@@ -1,5 +1,8 @@
 import styles from "~/styles/global.css";
-import type { LinksFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
+import type { LinksFunction } from "@remix-run/node";
+import logo from "public/images/goods-logo.svg";
+import profile from "public/images/user-regular.svg";
+import { Link } from "@remix-run/react";
 
 export const links: LinksFunction = () => {
   return [
@@ -9,19 +12,17 @@ export const links: LinksFunction = () => {
 
 export default function Navbar() {
   return (
-    <nav>
-      <svg className="logo" viewBox="0 0 273 273" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <mask id="mask0_32_63" maskUnits="userSpaceOnUse" x="12" y="12" width="249" height="249">
-        <rect x="12" y="12" width="249" height="249" rx="24" fill="#E2E2E2"/>
-        </mask>
-        <g mask="url(#mask0_32_63)">
-        <rect x="12" y="11.0001" width="249" height="249" fill="white"/>
-        <circle cx="242.5" cy="137.5" r="77.5" fill="#FFD600"/>
-        <circle cx="45.5" cy="267.5" r="68.5" fill="#FF9900"/>
-        <path d="M228.861 116.208C228.802 115.589 228.683 114.995 228.436 114.41C228.302 114.095 228.124 113.831 227.942 113.543C227.771 113.271 227.688 112.966 227.469 112.717L185.601 64.8674V36.2007C185.601 34.2541 184.687 32.4223 183.137 31.2512C181.58 30.0827 179.559 29.7013 177.699 30.24L90.8992 55.0403C88.2353 55.7998 86.4004 58.2338 86.4004 61.001V88.4042L46.1242 111.419C46.0882 111.44 46.0696 111.478 46.0317 111.499C45.9727 111.535 45.9046 111.551 45.8455 111.588C45.2902 111.945 44.833 112.405 44.426 112.902C44.3213 113.03 44.2372 113.161 44.1428 113.297C43.7692 113.836 43.4661 114.415 43.2786 115.047C43.262 115.102 43.2299 115.151 43.2151 115.208C43.079 115.723 43 116.255 43 116.801V321.401C43 323.832 44.4228 326.039 46.6327 327.044L114.833 358.044C114.917 358.082 115.011 358.067 115.096 358.102C115.833 358.4 116.602 358.727 117.4 358.727C117.988 358.727 118.573 358.601 119.139 358.601H119.149L224.55 327.476C227.19 326.698 229 324.153 229 321.401V116.801C229.001 116.593 228.882 116.413 228.861 116.208ZM98.8008 65.6783L173.201 44.4202V62.5253L98.8008 83.7827V65.6783ZM89.7185 100.787L105.104 135.402L62.7981 116.171L89.7185 100.787ZM111.201 342.772L55.4005 317.409V126.431L111.201 151.795V342.772ZM101.165 96.0022L177.324 74.2432L211.748 113.589L120.862 140.321L101.165 96.0022ZM216.601 316.764L123.601 344.117V152.439L216.601 125.087V316.764Z" fill="#2B2B2B"/>
-        </g>
-        <rect x="6" y="6" width="261" height="261" rx="30" stroke="#2B2B2B" stroke-width="12"/>
-        </svg>
+    <nav className="flex">
+      <img className="logo" src={logo} />
+      <div className="nav-items-right">
+        <ol>
+          <li>
+            <Link to="/login">
+              <img aria-label="User Profile" className="nav-item" src={profile} />
+            </Link>
+          </li>
+        </ol>
+      </div>
     </nav>
   )
 }

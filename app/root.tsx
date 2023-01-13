@@ -13,6 +13,7 @@ import Navbar from "~/components/navbar"
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import styles from "~/styles/global.css";
 import { getUser } from "./session.server";
+import Footer from "./components/footer";
 
 export const links: LinksFunction = () => {
   return [
@@ -40,12 +41,13 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="max-w-2xl">
+      <body className="">
         <Navbar />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        {/* <Footer /> */}
       </body>
     </html>
   );

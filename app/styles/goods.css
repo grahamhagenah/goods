@@ -1,0 +1,80 @@
+main {
+  display: block;
+  margin: 0 30%;
+}
+
+form {
+  background-color: #f6f6f6;
+  border-radius: 10px;
+}
+
+form input {
+  padding: 10px 20px;
+}
+
+.save-button {
+  right: 0;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+.item-form:hover .delete-button,
+.item-form:focus .delete-button {
+  visibility: visible;
+}
+
+.item-form .delete-button:hover {
+  background-color: #2b2b2b;
+  color: white;
+}
+
+.item-form .delete-button {
+  visibility: hidden;
+  border-radius: 4px;
+  position: absolute;
+  right: 0;
+  top: 50%;  
+  transform: translate(-10%, -50%);
+  margin: 0;
+  padding-right: .5rem;
+  padding: 4px 15px;
+  font-size: 14px;
+  background-color: transparent;
+  color: #2b2b2b;
+  outline: 2px solid #2b2b2b;
+}
+
+.item-form {
+  margin: .5rem 0;
+  position: relative;
+}
+
+.form-control {
+  position: absolute;
+  top: 50%;  
+  left: 0;
+  transform: translate(-50%, -50%);
+  padding-left: 3rem;
+}
+
+.goods-input {
+  background-color: #f6f6f6;
+  width: 100%;
+  padding: 0.75rem 0 0.75rem 3rem;
+}
+
+.incomplete-goods,
+.completed-goods {
+  min-height: 100px;
+}

@@ -13,14 +13,14 @@
 --m1: 8px;
 --rc: 8px;
 }
-
+/* 
 @media (prefers-color-scheme: dark) {
 	:root {
     --c2:#333;
     --c3:#1e1f20;
     --c4:#fff;
 	}
-}
+} */
 
 html {
     -ms-text-size-adjust: 100%;
@@ -41,37 +41,58 @@ body {
     color: var(--c4);
 }
 
-svg.logo {
+#main-form {
+  outline-color: #fe9900;
+}
+
+.logo {
   transform: scale(1);
-  max-width: 4rem;
+  border-radius: 100%;
+  width: auto;
+  height: 4rem;
   cursor: pointer;
+  border-radius: 100px;
   z-index: 1;
   position: relative;
   transition: .25s;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px 2px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px; */
+  outline: 3px solid #2b2b2b;
 }
 
-svg.logo:hover {
+.logo:hover {
   transform: scale(1.1);
   transition: .25s;
+  box-shadow: #0000001a 0 4px 8px 5px, #0000000f 0 2px 4px -1px
 }
 
 nav {
   padding: 0 0 3rem 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8rem;
 }
 
-input[type="checkbox"]::before {
-  content: "";
-  width: 0.65em;
-  height: 0.65em;
-  transform: scale(0);
-  transition: 120ms transform ease-in-out;
-  box-shadow: inset 1em 1em var(--form-control-color);
+.nav-items-right ol {
+  display: flex;
 }
 
-input[type="checkbox"]:checked::before {
-  transform: scale(1);
+.nav-item {
+  margin: 1rem;
+  width: 1.5rem;
+  cursor: pointer;
+  border-radius: 100%;
+  z-index: 1;
+  position: relative;
+  border-radius: 0;
 }
 
+footer {
+  background-color: #2b2b2b;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem; 
+}
 
 img, iframe {border: none; max-width: 100%}
 
@@ -116,11 +137,11 @@ pre,code,input,select,textarea,button,img {border-radius: var(--rc)}
 
 /* Forms */
 
-input, select, textarea {font-size: 1em; color:var(--c4); background: var(--c2); border: 0; padding: 0.6em}
+input, select, textarea {font-size: 1em; color:var(--c4); background: #f6f6f6; border: 0; padding: 0.6em}
 
 button, input[type=submit], input[type=reset], input[type="button"] { -webkit-appearance: none; font-size: 1em; display: inline-block; color: var(--c5); background: var(--c1);  border: 0; margin: 4px;  padding: 0.6em; cursor: pointer; text-align: center}
 
-button:hover, button:focus, input:hover, textarea:hover, select:hover {opacity: 0.8}
+/* button:hover, button:focus, input:hover, textarea:hover, select:hover {opacity: 0.8} */
 
 /* Infinite Grid */
 
