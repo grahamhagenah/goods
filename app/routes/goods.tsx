@@ -58,7 +58,7 @@ export default function GoodsPage() {
           <div className="incomplete-goods">
           <h2 className="text-lg opacity-50">Incomplete</h2>
             {data.incompleteGoodListItems.length === 0 ? (
-            <p className="p-4 empty-list">Nothing here! Add some items using the field above.</p>
+            <p className="p-4 empty-list">Nothing is here! Add some items using the field above.</p>
             ) : (
               <>
                 <ol>
