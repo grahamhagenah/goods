@@ -6,7 +6,8 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration
+  ScrollRestoration,
+  useLoaderData
 } from "@remix-run/react";
 
 import Navbar from "~/components/navbar"
@@ -14,6 +15,7 @@ import tailwindStylesheetUrl from "./styles/tailwind.css";
 import styles from "~/styles/global.css";
 import { getUser } from "./session.server";
 import Footer from "./components/footer";
+import type { LoaderFunction } from "@remix-run/node";
 
 export const links: LinksFunction = () => {
   return [
@@ -35,6 +37,14 @@ export async function loader({ request }: LoaderArgs) {
 }
 
 export default function App() {
+  const data = useLoaderData<typeof loader>();
+
+  let user = "Not Logged In"
+
+  if(data.user !== null) {
+    user = data.user;
+  }
+
   return (
     <html lang="en" className="h-full" id="root">
       <head>
@@ -42,7 +52,7 @@ export default function App() {
         <Links />
       </head>
       <body className="">
-        <Navbar />
+        <Navbar user={user}/>
         <Outlet />
         <ScrollRestoration />
         <Scripts />

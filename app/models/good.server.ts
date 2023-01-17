@@ -16,6 +16,13 @@ export function getGood({
   });
 }
 
+export function getUser({ userId }: {userId: User["id"]; }) {
+  return prisma.user.findFirst({
+    select: { name: true },
+    where: { userId },
+  });
+}
+
 export function getGoodListItems({ userId }: { userId: User["id"] }) {
   return prisma.good.findMany({
     where: { userId },
@@ -32,7 +39,7 @@ export function getIncompleteGoodListItems({ userId }: { userId: User["id"] }) {
         { completed: false},
       ],
     },
-    select: { id: true, title: true, completed: false, },
+    select: { id: true, title: true, completed: false, user: true, updatedAt: true },
     orderBy: { createdAt: "desc" },
   });
 }
@@ -45,7 +52,7 @@ export function getCompletedGoodListItems({ userId }: { userId: User["id"] }) {
         { completed: true},
       ],
     },
-    select: { id: true, title: true, completed: true, },
+    select: { id: true, title: true, completed: true, user: true, updatedAt: true },
     orderBy: { updatedAt: "desc" },
   });
 }
@@ -82,6 +89,7 @@ export function createGood({ title, userId }: Pick<Good, "title"> & { userId: Us
     data: {
       title,
       user: {
+        // The following query creates (create ) a new User record and connects that record (connect ) to an existing userId:
         connect: {
           id: userId,
         },

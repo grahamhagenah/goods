@@ -3,14 +3,15 @@ import type { LinksFunction } from "@remix-run/node";
 import * as React from "react";
 import { useRef } from "react";
 import tailwindStylesheetUrl from "~/styles/tailwind.css";
-import global from "~/styles/global.css";
 import goods from "~/styles/goods.css";
+import global from "~/styles/global.css";
+import plus from "public/images/plus-solid.svg";
 
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: tailwindStylesheetUrl }, 
-    { rel: "stylesheet", href: global },
-    { rel: "stylesheet", href: goods }
+    { rel: "stylesheet", href: goods },
+    { rel: "stylesheet", href: global }
   ];
 };
 
@@ -48,6 +49,7 @@ export default function NewGoodForm() {
             aria-invalid={actionData?.errors?.title ? true : undefined}
             aria-errormessage= { actionData?.errors?.title ? "title-error" : undefined }
           />
+          {/* <img className="plus-sign" src={plus}></img> */}
           <button name="_action" value="create" type="submit" className="save-button absolute py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400 hidden">
           Save
         </button>

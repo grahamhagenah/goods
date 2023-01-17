@@ -17,7 +17,7 @@ export const links: LinksFunction = () => {
 export default function Index() {
   const user = useOptionalUser();
   return (
-    <main className="relative bg-white sm:flex sm:items-center sm:justify-center">
+    <main className="relative sm:flex sm:items-center sm:justify-center">
       <div className="relative sm:pb-16 sm:pt-8">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="relative">
@@ -34,7 +34,7 @@ export default function Index() {
                 {user ? (
                   <Link
                     to="/goods"
-                    className="view-goods-button flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium shadow-sm sm:px-8"
+                    className="white-button flex items-center justify-center border rounded-md px-4 py-3 text-base font-medium sm:px-8"
                   >
                     View items for {user.name}
                   </Link>
@@ -42,13 +42,13 @@ export default function Index() {
                   <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
                     <Link
                       to="/join"
-                      className="join-button flex items-center justify-center rounded-md border bg-white text-black px-4 py-3 text-base font-medium sm:px-8"
+                      className="white-button flex items-center justify-center px-4 py-3 text-base font-medium sm:px-8"
                     >
                       Sign up
                     </Link>
                     <Link
                       to="/login"
-                      className="login-button flex items-center justify-center rounded-md px-4 py-3 font-medium text-white"
+                      className="primary-button flex items-center justify-center rounded-md px-4 py-3 font-medium text-white"
                     >
                       Log In
                     </Link>

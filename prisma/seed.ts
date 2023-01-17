@@ -31,6 +31,7 @@ async function seed() {
       title: "My completed good",
       completed: true,
       userId: user.id,
+      createdBy: user.id,
     },
   });
 
@@ -39,6 +40,7 @@ async function seed() {
       title: "My incomplete good",
       completed: false,
       userId: user.id,
+      createdBy: user.id,
     },
   });
 

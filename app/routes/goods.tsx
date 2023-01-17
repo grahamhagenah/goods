@@ -1,16 +1,16 @@
 import { LoaderArgs, ActionArgs, json} from "@remix-run/node";
-import { Form, Outlet, useLoaderData, useTransition, useFetcher, useSubmit } from "@remix-run/react";
+import { Outlet, useLoaderData, useTransition, useFetcher } from "@remix-run/react";
 import { requireUserId } from "~/session.server";
-import { useUser } from "~/utils";
 import { getCompletedGoodListItems, getIncompleteGoodListItems } from "~/models/good.server";
 import { updateGood, createGood, deleteGood, markComplete, markIncomplete } from "~/models/good.server";
-import minus from "public/images/minus-solid.svg";
+import ArrowTooltips from "~/components/dropdown";
+import React, { Component } from 'react'
 
 export async function loader({ request }: LoaderArgs) {
   const userId = await requireUserId(request);
   const completedGoodListItems = await getCompletedGoodListItems({ userId });
   const incompleteGoodListItems = await getIncompleteGoodListItems({ userId });
-  return json({ completedGoodListItems, incompleteGoodListItems });
+  return json({ completedGoodListItems, incompleteGoodListItems, userId });
 }
 
 export async function action({ request }: ActionArgs) {
@@ -74,7 +74,7 @@ export default function GoodsPage() {
               <></>
               ) : (
               <>
-                <h2 className="text-lg opacity-50">Completed</h2>
+                <h2 className="text-lg opacity-50">Complete</h2>
                 <ol>
                   {data.completedGoodListItems.map((good) => (
                     <GoodItem key={good.id} good={good} />
@@ -91,6 +91,11 @@ export default function GoodsPage() {
 
 function GoodItem ({ good }) {
 
+  const userName = good.user.name
+  const date = new Date(good.updatedAt)
+  const updatedAt = date.toLocaleDateString() + ", " + date.toLocaleTimeString()
+  const firstLetter = good.user.name.charAt(0).toUpperCase()
+
   const fetcher = useFetcher();
 
   const checked = fetcher.submission
@@ -106,19 +111,20 @@ function GoodItem ({ good }) {
   return (
     <li>
       <fetcher.Form method="post" className="item-form">
-        <input type="hidden" name="id" value={good.id}></input>
-        <label className="form-control">
-          <input
-            type="checkbox"
-            name="_action"
-            value={actionValue}
-            checked={checked}
-            onChange={(e) => fetcher.submit(e.target.form)}
-          />
-        </label>
-        <input name="title" type="text" defaultValue={good.title} className="goods-input"></input>
-        <button name="_action" value="update" type="submit" className="hidden">Update</button>
-        <button name="_action" value="delete" type="submit" aria-label="delete" className="delete-button font-bold py-2 px-4">Delete</button>
+          <input type="hidden" name="id" value={good.id}></input>
+          <label className="form-control">
+            <input
+              type="checkbox"
+              name="_action"
+              value={actionValue}
+              checked={checked}
+              onChange={(e) => fetcher.submit(e.target.form)}
+            />
+          </label>
+          <input name="title" type="text" defaultValue={good.title} className="goods-input"></input>
+          <button name="_action" value="update" type="submit" className="hidden">Update</button>
+          <ArrowTooltips firstName={userName} firstLetter={firstLetter} date={updatedAt}/>
+          <button name="_action" value="delete" type="submit" aria-label="delete" className="white-button font-bold py-2 px-4">—</button>
       </fetcher.Form>
     </li>
 )}
