@@ -11,7 +11,8 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Link } from '@remix-run/react';
+import { Form, Link } from "@remix-run/react";
+import FaceIcon from '@mui/icons-material/Face';
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -45,10 +46,7 @@ const StyledMenu = styled((props: MenuProps) => (
         marginRight: theme.spacing(1.5),
       },
       '&:active': {
-        backgroundColor: alpha(
-          theme.palette.primary.main,
-          theme.palette.action.selectedOpacity,
-        ),
+        backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity,),
       },
     },
   },
@@ -67,8 +65,8 @@ export default function CustomizedMenus( props ) {
   return (
     <div>
       <Button
-        id="demo-customized-button"
-        aria-controls={open ? 'demo-customized-menu' : undefined}
+        id="logged-in-indicator"
+        aria-controls={open ? 'logged-in-indicator' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         variant="contained"
@@ -76,36 +74,32 @@ export default function CustomizedMenus( props ) {
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
       >
-        {props.username}
+        <FaceIcon className="mr-3"/>
+        {props.username || "Logged Out"}
       </Button>
       <StyledMenu
-        id="demo-customized-menu"
+        id="logged-in-indicator"
         MenuListProps={{
-          'aria-labelledby': 'demo-customized-button',
+          'aria-labelledby': 'logged-in-indicator',
         }}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
       >
-        <Link to="/login">
+        <Link to="/login" className="login-button">
           <MenuItem onClick={handleClose} disableRipple>
             <AccountCircleIcon />
             Login
           </MenuItem>
         </Link>
-        <MenuItem onClick={handleClose} disableRipple>
-          <FileCopyIcon />
-          Logout
-        </MenuItem>
-        <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
-          <ArchiveIcon />
-          Archive
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          <MoreHorizIcon />
-          More
-        </MenuItem>
+        <Form action="/logout" method="post">
+          <button type="submit" id="logout-button">
+            <MenuItem onClick={handleClose} disableRipple>
+              <FileCopyIcon />
+              Logout
+            </MenuItem>
+          </button>
+        </Form>
       </StyledMenu>
     </div>
   );

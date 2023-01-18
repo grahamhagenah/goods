@@ -1,7 +1,7 @@
 import { LoaderArgs, ActionArgs, json} from "@remix-run/node";
 import { Outlet, useLoaderData, useTransition, useFetcher } from "@remix-run/react";
 import { requireUserId } from "~/session.server";
-import { getAllIncompleteGoodsWithinGroup, getAllCompletedGoodsWithinGroup, getCompletedGoodListItems, getIncompleteGoodListItems, getUser, getAllIncompleteGoods, getAllCompleteGoods } from "~/models/good.server";
+import { getAllIncompleteGoods, getAllCompleteGoods } from "~/models/good.server";
 import { updateGood, createGood, deleteGood, markComplete, markIncomplete } from "~/models/good.server";
 import ArrowTooltips from "~/components/dropdown";
 import React, { Component } from 'react'
@@ -14,16 +14,12 @@ export async function loader({ request }: LoaderArgs) {
   const user = await getUserById(userId);
   // Get GroupId of this user
   const groupId = await user.groupId
-  const incompleteGoodListItems = await getIncompleteGoodListItems({ userId });
-  const completedGoodListItems = await getCompletedGoodListItems({ userId });
-  const allIncompleteGoodsWithinGroup = await getAllIncompleteGoodsWithinGroup({ groupId });
   const allIncompleteGoods = await getAllIncompleteGoods({ groupId });
   const allCompleteGoods = await getAllCompleteGoods({ groupId });
-  const allCompletedGoodsWithinGroup = await getAllCompletedGoodsWithinGroup({ groupId });
 
   // const allUsersInGroup = await getAllUsersInGroup({ groupId });
 
-  return json({ completedGoodListItems, incompleteGoodListItems, userId, allIncompleteGoodsWithinGroup, allIncompleteGoods, allCompleteGoods, allCompletedGoodsWithinGroup, user, groupId });
+  return json({ userId, allIncompleteGoods, allCompleteGoods, user, groupId });
 }
 
 export async function action({ request }: ActionArgs) {
@@ -43,7 +39,7 @@ export async function action({ request }: ActionArgs) {
   }
 
   if(_action === "update") {
-    await updateGood({ title, id, user });
+    await updateGood({ title, id, userId });
   } 
   else if(_action === "create") {
     await createGood({ title, userId, groupId });
@@ -64,13 +60,7 @@ export async function action({ request }: ActionArgs) {
 export default function GoodsPage() {
   const data = useLoaderData<typeof loader>();
   let transition = useTransition();
-
-  console.log(data.allIncompleteGoods)
-
-  // i need to create a list containing all incompleted goods from users in a certain group
-  // console.log(data.allIncompleteGoodsWithinGroup);
-  // console.log(data.allUsersInGroup);
-
+  
   return (
     <div className="flex flex-col pt-16 mt-16">
       <main>
@@ -108,6 +98,8 @@ export default function GoodsPage() {
 
 function GoodItem ({ good }) {
 
+  console.log(good)
+
   const userName = good.user.name
   const date = new Date(good.updatedAt)
   const updatedAt = date.toLocaleDateString() + ", " + date.toLocaleTimeString()
@@ -123,7 +115,7 @@ function GoodItem ({ good }) {
 
   const actionValue = checked ? "restore" : "complete";
 
-  // Look into later: It works, but with an odd workaround. Why is "_action" not in the formData when unchecking a box?
+  // Why is restore not being assgined to vlaue for checkbox?
 
   return (
     <li>
@@ -139,7 +131,7 @@ function GoodItem ({ good }) {
             />
           </label>
           <input name="title" type="text" defaultValue={good.title} className="goods-input"></input>
-          <button name="_action" value="update" type="submit" className="hidden">Update</button>
+          <button name="_action" value="update" type="submit" className="update-button">Update</button>
           <ArrowTooltips firstName={userName} firstLetter={firstLetter} date={updatedAt}/>
           <button name="_action" value="delete" type="submit" aria-label="delete" className="white-button font-bold py-2 px-4">—</button>
       </fetcher.Form>

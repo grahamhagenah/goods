@@ -13,6 +13,13 @@ main form {
   visibility: hidden;
 }
 
+.update-button {
+  position: absolute; 
+  left: -9999px; 
+  width: 1px; 
+  height: 1px;
+}
+
 input[type="checkbox"]::before {
   content: "";
   width: 0.65em;

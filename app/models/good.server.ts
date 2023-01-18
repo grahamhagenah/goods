@@ -51,67 +51,6 @@ export function getIncompleteGoodListItems({ userId }: { userId: User["id"] }) {
   });
 }
 
-// You can do it in this way: just add goods to groups and go through groups to retrueve all goods
-
-export function getAllIncompleteGoodsWithinGroup({ groupId }: { groupId: User["groupId"] }) {
-
-  return prisma.user.findMany({
-    where: {
-      AND: [
-        { 
-          groupId,
-          // goods: {
-          //   completed: false,
-          // }
-        },
-      ],
-    },
-    select: { 
-      id: true, 
-      name: true, 
-      groupId: true, 
-      goods: {
-        select: {
-          id: true, 
-          title: true,
-          user: true,
-          completed: false,
-        }
-       },
-    },
-    orderBy: { createdAt: "desc" },
-  });
-}
-
-// maybe I'm going about this the wrong way, I need to return a "good" where the groupId is something and 
-
-export function getAllCompletedGoodsWithinGroup({ groupId }: { groupId: User["groupId"] }) {
-
-  return prisma.user.findMany({
-    where: {
-      AND: [
-        { 
-          groupId
-        },
-      ],
-    },
-    select: { 
-      id: true, 
-      name: true, 
-      groupId: true, 
-      goods: {
-        select: {
-          id: true, 
-          title: true,
-          user: true,
-          completed: true,
-        }
-       },
-    },
-    orderBy: { createdAt: "desc" },
-  });
-}
-
 export function getAllIncompleteGoods({ groupId }: { groupId: Group["id"] }) {
 
   return prisma.good.findMany({
@@ -140,42 +79,20 @@ export function getAllCompleteGoods({ groupId }: { groupId: Group["id"] }) {
   });
 }
 
-// export function getAllCompletedGoodListItems({ groupId }: { groupId: Group["id"] }) {
-//   return prisma.good.findMany({
-//     where: {
-//       AND: [
-//         { groupId: group.id },
-//         { completed: true},
-//       ],
-//     },
-//     select: { id: true, title: true, completed: true, user: true, updatedAt: true },
-//     orderBy: { updatedAt: "desc" },
-//   });
-// }
-
-
-export function getCompletedGoodListItems({ userId }: { userId: User["id"] }) {
-  return prisma.good.findMany({
-    where: {
-      AND: [
-        { userId },
-        { completed: true},
-      ],
-    },
-    select: { id: true, title: true, completed: true, user: true, updatedAt: true },
-    orderBy: { updatedAt: "desc" },
-  });
-}
-
 export function deleteGood({ id, userId,}: Pick<Good, "id"> & { userId: User["id"] }) {
   return prisma.good.deleteMany({
     where: { id, userId },
   });
 }
 
-export function updateGood({ title, id, user }) {
+// why doesn't this work? why can't i use user here
+
+export function updateGood({ title, id, userId }) {
   return prisma.good.update({
-    data: { title, user },
+    data: { 
+      title,
+      userId: userId,
+    },
     where: { id },
   });
 }

@@ -136,6 +136,29 @@ footer {
   position: relative;
 }
 
+#logged-in-indicator a:hover {
+  color: #2b2b2b;
+  text-decoration: none !important;
+}
+
+.primary-button {
+  background-color: #fea800;
+}
+
+button#logged-in-indicator {
+  background-color: #2b2b2b;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+#logout-button,
+#login-button {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: #2b2b2b;
+}
+
 .example-dropdown > ul {
   list-style: none;
   padding: 0;
@@ -168,7 +191,7 @@ footer {
 
 img, iframe {border: none; max-width: 100%}
 
-a {color: var(--c1);  text-decoration:none}
+a { text-decoration:none }
 
 a:hover { text-decoration: underline}
 
