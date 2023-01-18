@@ -15,6 +15,9 @@ async function seed() {
 
   const hashedPassword = await bcrypt.hash("racheliscool", 10);
 
+  // What I'm doing here is simulating both users being in the same group from the get-go
+  // The next thing I need to configure is making sure that each user gets their own group to start with
+  // then allowing the group id to be updated so that mutliple users can be in the same group
   const group = await prisma.group.create({
     data: {
       name: "Group!",
@@ -52,6 +55,7 @@ async function seed() {
       title: "My completed good",
       completed: true,
       userId: user.id,
+      groupId: group.id,
     },
   });
 
@@ -60,6 +64,7 @@ async function seed() {
       title: "My incomplete good",
       completed: false,
       userId: user.id,
+      groupId: group.id,
     },
   });
 
@@ -68,6 +73,7 @@ async function seed() {
       title: "My completed good",
       completed: true,
       userId: user2.id,
+      groupId: group.id,
     },
   });
 
@@ -76,6 +82,7 @@ async function seed() {
       title: "My incomplete good",
       completed: false,
       userId: user2.id,
+      groupId: group.id,
     },
   });
 

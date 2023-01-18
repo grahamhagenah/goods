@@ -15,6 +15,7 @@ model Group {
   updatedAt DateTime @updatedAt
 
   users    User[]
+  goods    Good[]
 }
 
 model User {
@@ -28,8 +29,8 @@ model User {
   password Password?
   goods    Good[]
 
-  group   Group?   @relation(fields: [groupId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  groupId String?
+  group   Group   @relation(fields: [groupId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  groupId String
 }
 
 model Password {
@@ -49,5 +50,8 @@ model Good {
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String
+
+  group   Group   @relation(fields: [groupId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  groupId String
 }
 

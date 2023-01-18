@@ -58,7 +58,12 @@ export function getAllIncompleteGoodsWithinGroup({ groupId }: { groupId: User["g
   return prisma.user.findMany({
     where: {
       AND: [
-        { groupId },
+        { 
+          groupId,
+          // goods: {
+          //   completed: false,
+          // }
+        },
       ],
     },
     select: { 
@@ -69,27 +74,69 @@ export function getAllIncompleteGoodsWithinGroup({ groupId }: { groupId: User["g
         select: {
           id: true, 
           title: true,
+          user: true,
           completed: false,
         }
        },
     },
-    orderBy: { createdAt: "asc" },
+    orderBy: { createdAt: "desc" },
   });
 }
 
-// ok given an arrary of users, 
+// maybe I'm going about this the wrong way, I need to return a "good" where the groupId is something and 
 
-export function getIncompleteGoodsWithinGroup({ group }) {
+export function getAllCompletedGoodsWithinGroup({ groupId }: { groupId: User["groupId"] }) {
 
-  return prisma.goods.findMany({
+  return prisma.user.findMany({
     where: {
       AND: [
-        { group: group },
+        { 
+          groupId
+        },
+      ],
+    },
+    select: { 
+      id: true, 
+      name: true, 
+      groupId: true, 
+      goods: {
+        select: {
+          id: true, 
+          title: true,
+          user: true,
+          completed: true,
+        }
+       },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+}
+
+export function getAllIncompleteGoods({ groupId }: { groupId: Group["id"] }) {
+
+  return prisma.good.findMany({
+    where: {
+      AND: [
+        { groupId: groupId },
         { completed: false },
       ],
     },
-    select: { id: true, name: true, groupId: true },
-    orderBy: { createdAt: "asc" },
+    select: { id: true, groupId: true, title: true, user: true, createdAt: true, updatedAt: true, completed: true },
+    orderBy: { createdAt: "desc" },
+  });
+}
+
+export function getAllCompleteGoods({ groupId }: { groupId: Group["id"] }) {
+
+  return prisma.good.findMany({
+    where: {
+      AND: [
+        { groupId: groupId },
+        { completed: true },
+      ],
+    },
+    select: { id: true, groupId: true, title: true, user: true, createdAt: true, updatedAt: true, completed: true },
+    orderBy: { createdAt: "desc" },
   });
 }
 
@@ -126,9 +173,9 @@ export function deleteGood({ id, userId,}: Pick<Good, "id"> & { userId: User["id
   });
 }
 
-export function updateGood({ title, id }) {
+export function updateGood({ title, id, user }) {
   return prisma.good.update({
-    data: { title },
+    data: { title, user },
     where: { id },
   });
 }
@@ -147,10 +194,15 @@ export function markComplete({ id }) {
   });
 }
 
-export function createGood({ title, userId }: Pick<Good, "title"> & { userId: User["id"]; }) {
+export function createGood({ title, userId, groupId }: Pick<Good, "title"> & { userId: User["id"] } & { groupId: Group["id"] }) {
   return prisma.good.create({
     data: {
       title,
+      group: {
+        connect: {
+          id: groupId,
+        },
+      },
       user: {
         // The following query creates (create ) a new User record and connects that record (connect ) to an existing userId:
         connect: {
