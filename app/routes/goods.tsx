@@ -1,16 +1,26 @@
 import { LoaderArgs, ActionArgs, json} from "@remix-run/node";
 import { Outlet, useLoaderData, useTransition, useFetcher } from "@remix-run/react";
 import { requireUserId } from "~/session.server";
-import { getCompletedGoodListItems, getIncompleteGoodListItems } from "~/models/good.server";
+import { getAllIncompleteGoodsWithinGroup, getAllUsersInGroup, getCompletedGoodListItems, getIncompleteGoodListItems, getUser } from "~/models/good.server";
 import { updateGood, createGood, deleteGood, markComplete, markIncomplete } from "~/models/good.server";
 import ArrowTooltips from "~/components/dropdown";
 import React, { Component } from 'react'
+import { getUserById } from "~/models/user.server";
+
+// what do i want to do here. I want to get the userId, then get the group of that user and get all items in that group. Possible?
 
 export async function loader({ request }: LoaderArgs) {
   const userId = await requireUserId(request);
-  const completedGoodListItems = await getCompletedGoodListItems({ userId });
+  const user = await getUserById(userId);
+  // Get GroupId of this user
+  const groupId = await user.groupId
   const incompleteGoodListItems = await getIncompleteGoodListItems({ userId });
-  return json({ completedGoodListItems, incompleteGoodListItems, userId });
+  const completedGoodListItems = await getCompletedGoodListItems({ userId });
+  const allIncompleteGoodsWithinGroup = await getAllIncompleteGoodsWithinGroup({ groupId });
+
+  // const allUsersInGroup = await getAllUsersInGroup({ groupId });
+
+  return json({ completedGoodListItems, incompleteGoodListItems, userId, allIncompleteGoodsWithinGroup, user, groupId });
 }
 
 export async function action({ request }: ActionArgs) {
@@ -50,21 +60,37 @@ export default function GoodsPage() {
   const data = useLoaderData<typeof loader>();
   let transition = useTransition();
 
+  // i need to create a list containing all incompleted goods from users in a certain group
+  // console.log(data.allIncompleteGoodsWithinGroup);
+  // console.log(data.allUsersInGroup);
+
   return (
     <div className="flex flex-col pt-16 mt-16">
-      <main className="">
+      <main>
         <Outlet />
-        <div className="">
+        <div>
           <div className="incomplete-goods">
+          <h2 className="text-lg opacity-50">Incomplete Within Entire Group</h2>
+            {data.incompleteGoodListItems.length === 0 ? (
+            <p className="p-4 empty-list">Nothing is here! Add some items using the field above.</p>
+            ) : (
+              <ol>
+                {data.allIncompleteGoodsWithinGroup.map((element) => 
+                  element.goods.map((good) => (
+                    <GoodItem key={good.id} good={good} />
+                  ))
+                )}
+              </ol>
+            )}
           <h2 className="text-lg opacity-50">Incomplete</h2>
             {data.incompleteGoodListItems.length === 0 ? (
             <p className="p-4 empty-list">Nothing is here! Add some items using the field above.</p>
             ) : (
               <>
                 <ol>
-                  {data.incompleteGoodListItems.map((good) => (
+                  {/* {data.incompleteGoodListItems.map((good) => (
                     <GoodItem key={good.id} good={good} />
-                  ))}
+                  ))} */}
                 </ol>
               </>
               )}
@@ -91,10 +117,12 @@ export default function GoodsPage() {
 
 function GoodItem ({ good }) {
 
-  const userName = good.user.name
+  console.log(good)
+
+  // const userName = good.user.name
   const date = new Date(good.updatedAt)
   const updatedAt = date.toLocaleDateString() + ", " + date.toLocaleTimeString()
-  const firstLetter = good.user.name.charAt(0).toUpperCase()
+  // const firstLetter = good.user.name.charAt(0).toUpperCase()
 
   const fetcher = useFetcher();
 
@@ -123,7 +151,7 @@ function GoodItem ({ good }) {
           </label>
           <input name="title" type="text" defaultValue={good.title} className="goods-input"></input>
           <button name="_action" value="update" type="submit" className="hidden">Update</button>
-          <ArrowTooltips firstName={userName} firstLetter={firstLetter} date={updatedAt}/>
+          {/* <ArrowTooltips firstName={userName} firstLetter={firstLetter} date={updatedAt}/> */}
           <button name="_action" value="delete" type="submit" aria-label="delete" className="white-button font-bold py-2 px-4">—</button>
       </fetcher.Form>
     </li>

@@ -5,7 +5,7 @@ import * as React from "react";
 
 import { getUserId, createUserSession } from "~/session.server";
 
-import { createUser, getUserByEmail } from "~/models/user.server";
+import { createGroup, createUser, getUserByEmail } from "~/models/user.server";
 import { safeRedirect, validateEmail } from "~/utils";
 
 export async function loader({ request }: LoaderArgs) {
@@ -62,7 +62,9 @@ export async function action({ request }: ActionArgs) {
     );
   }
 
-  const user = await createUser(email, password, name);
+  const group = await createGroup();
+
+  const user = await createUser(email, password, name, group.id);
 
   return createUserSession({
     request,

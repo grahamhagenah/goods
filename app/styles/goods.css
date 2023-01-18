@@ -10,6 +10,7 @@ main form {
 
 .save-button {
   right: 0;
+  visibility: hidden;
 }
 
 input[type="checkbox"]::before {

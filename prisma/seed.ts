@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { group } from "console";
 
 const prisma = new PrismaClient();
 
@@ -14,10 +15,30 @@ async function seed() {
 
   const hashedPassword = await bcrypt.hash("racheliscool", 10);
 
+  const group = await prisma.group.create({
+    data: {
+      name: "Group!",
+    },
+  });
+
   const user = await prisma.user.create({
     data: {
       email,
       name,
+      groupId: group.id,
+      password: {
+        create: {
+          hash: hashedPassword,
+        },
+      },
+    },
+  });
+
+  const user2 = await prisma.user.create({
+    data: {
+      email: "grahamsss@gmail.com",
+      name: "Sarah",
+      groupId: group.id,
       password: {
         create: {
           hash: hashedPassword,
@@ -31,7 +52,6 @@ async function seed() {
       title: "My completed good",
       completed: true,
       userId: user.id,
-      createdBy: user.id,
     },
   });
 
@@ -40,7 +60,22 @@ async function seed() {
       title: "My incomplete good",
       completed: false,
       userId: user.id,
-      createdBy: user.id,
+    },
+  });
+
+  await prisma.good.create({
+    data: {
+      title: "My completed good",
+      completed: true,
+      userId: user2.id,
+    },
+  });
+
+  await prisma.good.create({
+    data: {
+      title: "My incomplete good",
+      completed: false,
+      userId: user2.id,
     },
   });
 
