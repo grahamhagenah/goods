@@ -1,4 +1,4 @@
-app = "todo-7a80"
+app = "scant-goods"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = [ ]
