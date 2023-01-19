@@ -55,6 +55,7 @@ export async function action({ request }: ActionArgs) {
   }
   
   return null;
+  
 }
 
 export default function GoodsPage() {
