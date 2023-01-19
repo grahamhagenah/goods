@@ -104,6 +104,19 @@ nav {
   display: flex;
 }
 
+/* .nav-items-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+} */
+
+/* nav a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+} */
+
 .nav-item {
   width: 1.5rem;
   cursor: pointer;

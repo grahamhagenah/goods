@@ -91,18 +91,22 @@ export default function CustomizedMenus( props ) {
             Login
           </MenuItem>
         </Link>
-        <Form action="/logout" method="post">
-          <button type="submit" id="logout-button">
+        {props.username &&
+        <>
+          <Form action="/logout" method="post">
+            <button type="submit" id="logout-button">
+              <MenuItem onClick={handleClose} disableRipple>
+                Logout
+              </MenuItem>
+            </button>
+          </Form>
+          <Link to="/account" className="login-button">
             <MenuItem onClick={handleClose} disableRipple>
-              Logout
+              Account
             </MenuItem>
-          </button>
-        </Form>
-        <Link to="/account" className="login-button">
-          <MenuItem onClick={handleClose} disableRipple>
-            Account
-          </MenuItem>
-        </Link>
+          </Link>
+        </>
+        }
       </StyledMenu>
     </div>
   );

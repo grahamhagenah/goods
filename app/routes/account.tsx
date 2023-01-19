@@ -39,6 +39,7 @@ export default function AccountDetailsPage() {
       <div className="mx-auto w-full max-w-md px-8">
       <h1>Account</h1>
       <Form method="post" className="">
+        <h3>Your Group ID: {data.user.groupId}</h3>
         <input name="groupId" type="text" className=""></input>
         <button name="_action" value="updateGroup" type="submit" className="primary-button">Update</button>
       </Form>
