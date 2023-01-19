@@ -22,12 +22,21 @@ export async function createGroup() {
   });
 }
 
+export function updateGroup({ userId, groupId }) {
+  return prisma.user.update({
+    data: { 
+      groupId: groupId,
+    },
+    where: { id: userId },
+  });
+}
+
 export async function createUser(email: User["email"], password: string, name: User["name"] ) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const group = await prisma.group.create({
     data: {
-      name,
+      name: name + "_group",
     },
   });
 

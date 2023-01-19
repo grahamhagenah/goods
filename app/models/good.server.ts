@@ -85,8 +85,6 @@ export function deleteGood({ id, userId,}: Pick<Good, "id"> & { userId: User["id
   });
 }
 
-// why doesn't this work? why can't i use user here
-
 export function updateGood({ title, id, userId }) {
   return prisma.good.update({
     data: { 

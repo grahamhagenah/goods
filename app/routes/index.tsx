@@ -1,6 +1,5 @@
 import { Link } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
-
 import { useOptionalUser } from "~/utils";
 import login from "~/styles/login.css";
 import { useRef } from "react";
