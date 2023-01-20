@@ -62,7 +62,7 @@ export default function GoodsPage() {
   let transition = useTransition();
   
   return (
-    <div className="flex flex-col pt-16 mt-16">
+    <div className="flex flex-col md:pt-0 lg:pt-16 mt-16">
       <main>
         <Outlet />
           <div className="incomplete-goods">

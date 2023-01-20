@@ -7,7 +7,7 @@ export default function ArrowTooltips( props ) {
       arrow 
       placement="left"
       >
-      <button className="name-label font-bold">{props.firstLetter}</button>
+      <span className="name-label font-bold">{props.firstLetter}</span>
     </Tooltip>
   );
 }

@@ -100,18 +100,11 @@ nav {
   display: flex;
 }
 
-/* .nav-items-right {
+.nav-items-right {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-} */
-
-/* nav a {
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-} */
+  justify-content: top;
+}
 
 .nav-item {
   width: 1.5rem;
@@ -145,7 +138,7 @@ footer {
   position: relative;
 }
 
-#logged-in-indicator a:hover {
+#-indicator a:hover {
   color: #2b2b2b;
   text-decoration: none !important;
 }
@@ -157,9 +150,13 @@ footer {
 }
 
 button#logged-in-indicator {
-  background-color: #2b2b2b;
+  background-color: #ffffff;
   text-transform: capitalize;
-  font-weight: 500;
+  font-weight: 600;
+  border-radius: 100px;
+  padding: 5px 10px;
+  color: #2b2b2b;
+  border: 2px solid #2b2b2b;
 }
 
 #logout-button,
@@ -261,3 +258,30 @@ article {background: var(--c2); border-radius: var(--rc); padding: 1em; box-shad
 
 [style*="--c:"]:first-child, section>section:first-child, article:first-child {margin-left:0}
 [style*="--c:"]:last-child, section>section:last-child, article:last-child {margin-right:0}
+
+
+@media only screen and (max-width: 600px) {
+  nav #site-title {
+    display: none;
+    visibility: hidden;
+  }
+
+  body {
+    margin: 15px auto;
+  }
+
+  .goods-input {
+    padding: 0.6rem 85px 0.6rem 3rem;
+  }
+
+  nav {
+    padding: 0 15px;
+  }
+
+  .nav-items-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+}
