@@ -35,7 +35,7 @@ export default function Index() {
                     to="/goods"
                     className="white-button flex items-center justify-center border rounded-md px-4 py-3 text-base font-medium sm:px-8"
                   >
-                    View items for {user.name}
+                    View goods for {user.name}
                   </Link>
                 ) : (
                   <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">

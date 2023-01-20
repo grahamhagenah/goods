@@ -23,13 +23,6 @@ export function getUser({ userId }: {userId: User["id"]; }) {
   });
 }
 
-export function getGroup({ groupId }: {groupId: Group["id"]; }) {
-  return prisma.group.findFirst({
-    select: { id: true },
-    where: { groupId },
-  });
-}
-
 export function getGoodListItems({ userId }: { userId: User["id"] }) {
   return prisma.good.findMany({
     where: { userId },

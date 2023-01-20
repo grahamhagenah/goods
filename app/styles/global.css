@@ -92,10 +92,6 @@ nav {
   color: white;
 }
 
-.primary-button {
-  color: white;
-}
-
 .primary-button:hover {
   color: white;
 }
@@ -156,6 +152,8 @@ footer {
 
 .primary-button {
   background-color: #fea800;
+  margin: 0;
+  color: white;
 }
 
 button#logged-in-indicator {

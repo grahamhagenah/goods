@@ -13,6 +13,13 @@ export async function getUserByEmail(email: User["email"]) {
   return prisma.user.findUnique({ where: { email } });
 }
 
+export function getGroup({ groupId }: {groupId: Group["id"]; }) {
+  return prisma.group.findFirst({
+    select: { id: true },
+    where: { groupId },
+  });
+}
+
 export async function createGroup() {
 
   return prisma.group.create({
@@ -23,6 +30,15 @@ export async function createGroup() {
 }
 
 export function updateGroup({ userId, groupId }) {
+
+  if(getGroup(groupId) === null) {
+    return prisma.group.create({
+      data: {
+        name: groupId + "group",
+      },
+    });
+  }
+
   return prisma.user.update({
     data: { 
       groupId: groupId,

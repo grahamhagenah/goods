@@ -98,8 +98,6 @@ export default function GoodsPage() {
 
 function GoodItem ({ good }) {
 
-  console.log(good)
-
   const userName = good.user.name
   const date = new Date(good.updatedAt)
   const updatedAt = date.toLocaleDateString() + ", " + date.toLocaleTimeString()
@@ -114,8 +112,6 @@ function GoodItem ({ good }) {
     good.completed || false;
 
   const actionValue = checked ? "restore" : "complete";
-
-  // Why is restore not being assgined to vlaue for checkbox?
 
   return (
     <li>

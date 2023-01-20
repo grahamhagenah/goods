@@ -32,21 +32,54 @@ export default function AccountDetailsPage() {
 
   const data = useLoaderData<typeof loader>();
 
-  console.log(data.user.groupId)
-
   return (
     <div className="flex min-h-full flex-col justify-center pt-16 mt-16">
       <div className="mx-auto w-full max-w-md px-8">
-      <h1>Account</h1>
-      <Form method="post" className="">
-        <h3>Your Group ID: {data.user.groupId}</h3>
-        <input name="groupId" type="text" className=""></input>
-        <button name="_action" value="updateGroup" type="submit" className="primary-button">Update</button>
-      </Form>
+      <Form method="post" className="space-y-6">
+      {/* <div>
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Email address
+        </label>
+        <div className="mt-1">
+          <input
+            id="email"
+            required
+            autoFocus={true}
+            name="email"
+            type="email"
+            autoComplete="email"
+            aria-describedby="email-error"
+            defaultValue={data.user.email}
+            className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+          />
+        </div>
+      </div> */}
+      <div>
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium text-gray-700"
+        >
+          <h3>Group ID </h3>
+          <p className="mb-3">Share this Group ID with someone or update your ID</p>
+        </label>
+        <div className="mt-1">
+          <input
+            id="group"
+            required
+            autoFocus={true}
+            name="groupId"
+            type="text"
+            defaultValue={data.user.groupId}
+            className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+          />
+        </div>
       </div>
+      <button type="submit" name="_action" value="updateGroup" className="primary-button w-full rounded py-2 px-4 text-white">Update Group</button>
+    </Form>
     </div>
+  </div>
   );
 }
-
-// Graham Hagenah group id: "cld298oas000qtsmdv1jxbhpu"
-//Jenny group Id: "cld2bc02900029reirvgummph"
