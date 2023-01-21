@@ -143,11 +143,11 @@ textarea {
 .empty-list {
   border-radius: 4px;
   background-color: #fe99001f;
+  padding: 0.6rem 0 0.6rem 1rem;
 }
 
 .incomplete-goods,
 .completed-goods {
-  min-height: 100px;
   margin-bottom: 2rem;
 }
 

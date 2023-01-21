@@ -13,14 +13,22 @@ export const links: LinksFunction = () => {
 
 export default function Navbar( props ) {
 
-  // console.log(props.group.name)
+  let groupName;
+
+  if(props.group === null) {
+    groupName = ""
+  }
+  else {
+    groupName = props.group.name;
+  }
+
 
   return (
     <nav className="flex">
       <Link to="/goods">
         <img className="logo" src={logo} />
       </Link>
-      <h1 id="site-title">{props.group.name}</h1>
+      <h1 id="site-title">{groupName}</h1>
       <div className="nav-items-right">
         <IconMenu username={props.user.name}/> 
       </div>
