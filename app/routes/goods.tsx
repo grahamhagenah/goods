@@ -1,7 +1,7 @@
 import { LoaderArgs, ActionArgs, json} from "@remix-run/node";
 import { Outlet, useLoaderData, useTransition, useFetcher } from "@remix-run/react";
 import { requireUserId } from "~/session.server";
-import { getAllIncompleteGoods, getAllCompleteGoods } from "~/models/good.server";
+import { getAllIncompleteGoods, getAllCompleteGoods, createEmptyGood } from "~/models/good.server";
 import { updateGood, createGood, deleteGood, markComplete, markIncomplete } from "~/models/good.server";
 import ArrowTooltips from "~/components/dropdown";
 import React, { Component } from 'react'
@@ -39,6 +39,7 @@ export async function action({ request }: ActionArgs) {
   }
 
   if(_action === "update") {
+    await createEmptyGood({ userId, groupId });
     await updateGood({ title, id, userId });
   } 
   else if(_action === "create") {
@@ -65,8 +66,8 @@ export default function GoodsPage() {
     <div className="flex flex-col md:pt-0 lg:pt-16 mt-16">
       <main>
         <Outlet />
-          <div className="incomplete-goods">
-          <h2 className="text-lg opacity-50">Incomplete</h2>
+          <details className="incomplete-goods" open>
+          <summary><h2>Incomplete</h2></summary>
             {data.allIncompleteGoods.length === 0 ? (
             <p className="p-4 empty-list">Nothing is here! Add some items using the field above.</p>
             ) : (
@@ -76,21 +77,21 @@ export default function GoodsPage() {
                 )}
               </ol>
             )}
-            <div className="completed-goods">
+          </details>
             {data.allCompleteGoods.length === 0 ? (
-               <></>
+                <></>
               ) : (
-                <>
-                  <h2 className="text-lg opacity-50">Complete</h2>
-                  <ol>
-                    {data.allCompleteGoods.map((good) => 
-                      <GoodItem key={good.id} good={good} />
-                    )}
-                  </ol>
-                </>
+              <>
+                <details className="incomplete-goods" open>
+                <summary><h2>Complete</h2></summary>
+                <ol>
+                  {data.allCompleteGoods.map((good) => 
+                    <GoodItem key={good.id} good={good} />
+                  )}
+                </ol>
+                </details>
+              </>
               )}
-            </div>
-        </div>
       </main>
     </div>
   );

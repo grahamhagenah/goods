@@ -3,13 +3,14 @@ import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Menu, { MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import DnsIcon from '@mui/icons-material/Dns';
-import SettingsIcon from '@mui/icons-material/Settings';
-import LoginIcon from '@mui/icons-material/Login';
-import LogoutIcon from '@mui/icons-material/Logout';
+import { BsFillGearFill } from 'react-icons/bs';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Form, Link } from "@remix-run/react";
+import { VscKey } from 'react-icons/vsc';
+import { FiLogOut } from 'react-icons/fi';
+import { FiSettings } from 'react-icons/fi';
+import logoOutline from "public/images/goods-icon-outline.svg";
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -26,7 +27,7 @@ const StyledMenu = styled((props: MenuProps) => (
   />
 ))(({ theme }) => ({
   '& .MuiPaper-root': {
-    borderRadius: 6,
+    borderRadius: 20,
     marginTop: theme.spacing(1),
     minWidth: 180,
     color:
@@ -34,11 +35,12 @@ const StyledMenu = styled((props: MenuProps) => (
     boxShadow:
       'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
     '& .MuiMenu-list': {
-      padding: '4px 0',
+      padding: '8px',
     },
     '& .MuiMenuItem-root': {
       '& .MuiSvgIcon-root': {
         fontSize: 18,
+        borderRadius: 20,
         color: theme.palette.text.secondary,
         marginRight: theme.spacing(1.5),
       },
@@ -88,14 +90,14 @@ export default function CustomizedMenus( props ) {
         {props.username &&
           <Link to="/goods" className="login-button">
             <MenuItem onClick={handleClose} disableRipple>
-              <DnsIcon />
+              <img className="dropdown-icon mr-3" src={logoOutline} />
               Goods
             </MenuItem>
           </Link>
         }
         <Link to="/login" className="login-button">
           <MenuItem onClick={handleClose} disableRipple>
-            <LoginIcon />
+            <VscKey className="dropdown-icon mr-3"/>
             Login
           </MenuItem>
         </Link>
@@ -103,7 +105,7 @@ export default function CustomizedMenus( props ) {
           <Form action="/logout" method="post">
             <button type="submit" id="logout-button">
               <MenuItem onClick={handleClose} disableRipple>
-                <LogoutIcon />
+                <FiLogOut className="dropdown-icon mr-3"/>
                 Logout
               </MenuItem>
             </button>
@@ -112,8 +114,8 @@ export default function CustomizedMenus( props ) {
         {props.username &&
         <Link to="/account" className="login-button">
           <MenuItem onClick={handleClose} disableRipple>
-            <SettingsIcon />
-            Account Settings
+            <FiSettings className="dropdown-icon mr-3"/>
+            Account
           </MenuItem>
         </Link>
         }

@@ -102,10 +102,30 @@ export function markComplete({ id }) {
   });
 }
 
+
 export function createGood({ title, userId, groupId }: Pick<Good, "title"> & { userId: User["id"] } & { groupId: Group["id"] }) {
   return prisma.good.create({
     data: {
       title,
+      group: {
+        connect: {
+          id: groupId,
+        },
+      },
+      user: {
+        // The following query creates (create ) a new User record and connects that record (connect ) to an existing userId:
+        connect: {
+          id: userId,
+        },
+      },
+    },
+  });
+}
+
+export function createEmptyGood({ userId, groupId }: { userId: User["id"] } & { groupId: Group["id"] }) {
+  return prisma.good.create({
+    data: {
+      title: "",
       group: {
         connect: {
           id: groupId,

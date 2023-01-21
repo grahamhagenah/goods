@@ -13,9 +13,8 @@ import {
 import Navbar from "~/components/navbar"
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import styles from "~/styles/global.css";
-import { getUser } from "./session.server";
-import Footer from "./components/footer";
-import type { LoaderFunction } from "@remix-run/node";
+import { getUser, getUserId, requireUserId } from "./session.server";
+import { getGroup, getGroupById, getUserById } from "./models/user.server";
 
 export const links: LinksFunction = () => {
   return [
@@ -31,10 +30,16 @@ export const meta: MetaFunction = () => ({
 });
 
 export async function loader({ request }: LoaderArgs) {
-  return json({
-    user: await getUser(request),
-  });
+  const user = await getUser(request)
+  let group = null
+
+  if(user) {
+    group = await getGroupById(user.groupId);
+  }
+ 
+  return json({ user, group});
 }
+
 
 export default function App() {
   const data = useLoaderData<typeof loader>();
@@ -52,7 +57,7 @@ export default function App() {
         <Links />
       </head>
       <body className="">
-        <Navbar user={user}/>
+        <Navbar user={user} group={data.group} />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
