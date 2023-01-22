@@ -78,7 +78,19 @@ export function deleteGood({ id, userId,}: Pick<Good, "id"> & { userId: User["id
   });
 }
 
+export function clearGoods({ groupId }: { groupId: Group["id"] }) {
+  return prisma.good.deleteMany({
+    where: {
+      AND: [
+        { groupId: groupId },
+        { completed: true },
+      ],
+    },
+  });
+}
+
 export function updateGood({ title, id, userId }) {
+
   return prisma.good.update({
     data: { 
       title,
