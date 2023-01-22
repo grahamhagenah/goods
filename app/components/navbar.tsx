@@ -22,7 +22,6 @@ export default function Navbar( props ) {
     groupName = props.group.name;
   }
 
-
   return (
     <nav className="flex">
       <Link to="/goods">
@@ -30,7 +29,7 @@ export default function Navbar( props ) {
       </Link>
       <h1 id="site-title">{groupName}</h1>
       <div className="nav-items-right">
-        <IconMenu username={props.user.name}/> 
+        <IconMenu username={props.user.name} /> 
       </div>
     </nav>
   )

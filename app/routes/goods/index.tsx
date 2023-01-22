@@ -36,7 +36,7 @@ export default function NewGoodForm() {
   }, [isAdding]);
 
   return (
-    <Form method="post" ref={formRef} action="/goods" className="mb-16">
+    <Form method="post" ref={formRef} action="/goods" className="mb-16 lg:mb-16">
       <div>
         <label className="flex w-full flex-col gap-1 relative">
           <input

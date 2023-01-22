@@ -48,14 +48,14 @@ body {
 }
 
 #main-form {
-  padding: 1rem 0 1rem 3rem;
+  padding: .75rem 0 .75rem 3rem;
 }
 
 .logo {
   transform: scale(1);
   border-radius: 100%;
   width: auto;
-  height: 4rem;
+  height: 3.5rem;
   cursor: pointer;
   border-radius: 100px;
   z-index: 1;
@@ -66,19 +66,24 @@ body {
 }
 
 #site-title {
-  visibility: hidden;
-}
-
-.logo:hover {
-  transform: scale(1.1);
-  transition: .25s;
-  box-shadow: #0000001a 0 4px 8px 5px, #0000000f 0 2px 4px -1px
+  text-transform: uppercase;
+  color: #2b2b2b;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 8px;
+  text-decoration-color: #ffa800;
 }
 
 .logo:active {
-  transform: scale(1..05);
+  transform: scale(.95);
   transition: .1s;
-  box-shadow: #0000001a 0 2px 5px 2px, #0000000f 0 2px 4px -1px
 }
 
 nav {
@@ -302,10 +307,10 @@ article {background: var(--c2); border-radius: var(--rc); padding: 1em; box-shad
 
 
 @media only screen and (max-width: 600px) {
-  nav #site-title {
+  /* nav #site-title {
     display: none;
     visibility: hidden;
-  }
+  } */
 
   body {
     margin: 15px auto;

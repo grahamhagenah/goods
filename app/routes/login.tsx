@@ -144,7 +144,7 @@ export default function LoginPage() {
           >
             Log in
           </button>
-          <div className="flex items-center justify-between">
+          <div className="block md:flex items-center justify-between">
             <div className="flex items-center">
               <input
                 id="remember"
@@ -159,7 +159,7 @@ export default function LoginPage() {
                 Remember me
               </label>
             </div>
-            <div className="text-center text-sm text-gray-500">
+            <div className="text-left text-sm text-gray-500 mt-5 md:mt-0">
               Don't have an account?{" "}
               <Link
                 className="text-blue-500 underline"

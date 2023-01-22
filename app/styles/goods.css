@@ -160,22 +160,6 @@ textarea {
   padding: 2rem;
 }
 
-#site-title {
-  text-transform: uppercase;
-  color: #2b2b2b;
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: 1px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  text-decoration: underline;
-  text-decoration-style: wavy;
-  text-underline-offset: 8px;
-  text-decoration-color: #ffa800;
-}
-
 input, select, textarea {
   padding: 0.35rem;
 }
@@ -199,7 +183,6 @@ input, select, textarea {
   border: 2px solid #2b2b2c;
   padding: 7px;
 }
-
 
 /* Pseudo element for check styling */
 
@@ -253,6 +236,11 @@ input, select, textarea {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cpath d='M15.88 8.29L10 14.17l-1.88-1.88a.996.996 0 1 0-1.41 1.41l2.59 2.59c.39.39 1.02.39 1.41 0L17.3 9.7a.996.996 0 0 0 0-1.41c-.39-.39-1.03-.39-1.42 0z' fill='%23fff'/%3E %3C/svg%3E");
 }
 
+.empty-icon {
+  display: inline;
+  font-size: 19px;
+}
+
 
 @media only screen and (max-width: 600px) {
 
@@ -260,12 +248,19 @@ input, select, textarea {
     margin: 0 15px;
   }
 
+  [type=checkbox] {
+    width: 0.75rem;
+    height: 0.75rem;
+    padding: 9px;
+  }
+
   .logo {
-    height: 3.5rem;
+    height: 2.25rem;
+    border: 2px solid #2b2b2b;
   }
 
   #main-form {
-    padding: 10px 15px;
+    padding: 5px 15px;
   }
 }
 

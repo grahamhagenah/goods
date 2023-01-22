@@ -95,12 +95,14 @@ export default function CustomizedMenus( props ) {
             </MenuItem>
           </Link>
         }
+         {!props.username &&
         <Link to="/login" className="login-button">
           <MenuItem onClick={handleClose} disableRipple>
             <VscKey className="dropdown-icon mr-3"/>
             Login
           </MenuItem>
         </Link>
+        }
         {props.username &&
           <Form action="/logout" method="post">
             <button type="submit" id="logout-button">

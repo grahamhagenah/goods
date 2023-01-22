@@ -6,6 +6,7 @@ import { updateGood, createGood, deleteGood, markComplete, markIncomplete } from
 import ArrowTooltips from "~/components/dropdown";
 import React, { Component } from 'react'
 import { getUserById } from "~/models/user.server";
+import { SlGhost } from 'react-icons/sl';
 
 // what do i want to do here. I want to get the userId, then get the group of that user and get all items in that group. Possible?
 
@@ -69,7 +70,7 @@ export default function GoodsPage() {
           <details className="incomplete-goods" open>
           <summary><h2>Incomplete</h2></summary>
             {data.allIncompleteGoods.length === 0 ? (
-            <p className="p-4 empty-list">Nothing is here! Add some items using the field above.</p>
+              <p className="p-4 empty-list"><SlGhost className="empty-icon mr-3"/>Nothing is here! Maybe add some items?</p>
             ) : (
               <ol>
                 {data.allIncompleteGoods.map((good) => 
