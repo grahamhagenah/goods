@@ -18,12 +18,8 @@ export default function Navbar( props ) {
       <Link to="/goods">
         <img className="logo" src={logo} />
       </Link>
-      {props.group && 
-        <GroupInfo groupName={props.group.name} group={props.group} /> 
-      }
-      <div className="nav-items-right">
-        <UserInfo username={props.user.name}/> 
-      </div>
+      {props.group && <GroupInfo groupName={props.group.name} group={props.group} /> }
+      <UserInfo username={props.user.name}/> 
     </nav>
   )
 }

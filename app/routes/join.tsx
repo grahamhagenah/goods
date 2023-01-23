@@ -127,7 +127,7 @@ export default function Join() {
                 autoFocus={true}
                 name="name"
                 type="name"
-                autocomplete="given-name"
+                autoComplete="given-name"
                 aria-invalid={actionData?.errors?.name ? true : undefined}
                 aria-describedby="name-error"
                 className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
@@ -154,7 +154,7 @@ export default function Join() {
                 autoFocus={true}
                 name="surname"
                 type="name"
-                autocomplete="family-name"
+                autoComplete="family-name"
                 aria-invalid={actionData?.errors?.surname ? true : undefined}
                 aria-describedby="name-error"
                 className="w-full rounded border border-gray-500 px-2 py-1 text-lg"

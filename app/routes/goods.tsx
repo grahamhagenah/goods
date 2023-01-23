@@ -1,10 +1,8 @@
 import { LoaderArgs, ActionArgs, json} from "@remix-run/node";
 import { Outlet, useLoaderData, useTransition, useFetcher, Form } from "@remix-run/react";
 import { requireUserId } from "~/session.server";
-import { getAllIncompleteGoods, getAllCompleteGoods, createEmptyGood, clearGoods } from "~/models/good.server";
+import { getAllIncompleteGoods, getAllCompleteGoods, clearGoods } from "~/models/good.server";
 import { updateGood, createGood, deleteGood, markComplete, markIncomplete } from "~/models/good.server";
-import IconMenu from "~/components/dropdown";
-import React, { Component } from 'react'
 import { getUserById } from "~/models/user.server";
 import { SlGhost } from 'react-icons/sl';
 import LongMenu from "~/components/dropdown";
@@ -61,7 +59,6 @@ export async function action({ request }: ActionArgs) {
 
 export default function GoodsPage() {
   const data = useLoaderData<typeof loader>();
-  let transition = useTransition();
   const fetcher = useFetcher();
   
   return (
@@ -89,24 +86,24 @@ export default function GoodsPage() {
               ) : (
               <>
                 <details className="incomplete-goods" open>
-                <summary>
-                  <h2>Incomplete</h2>
-                  <span className="counter">{data.allCompleteGoods.length}</span>
-                  <fetcher.Form method="post" id="clear-items-form">
-                    <button className="clear-all" name="_action" value="clear" type="submit">
-                     Clear
-                    </button>
-                  </fetcher.Form>
-                </summary>
-                <ol>
-                  {data.allCompleteGoods.map((good) => 
-                    <GoodItem key={good.id} good={good} />
-                  )}
-                </ol>
+                  <summary>
+                    <h2>Incomplete</h2>
+                    <span className="counter">{data.allCompleteGoods.length}</span>
+                    <fetcher.Form method="post" id="clear-items-form">
+                      <button className="clear-all" name="_action" value="clear" type="submit">
+                      Clear
+                      </button>
+                    </fetcher.Form>
+                  </summary>
+                  <ol>
+                    {data.allCompleteGoods.map((good) => 
+                      <GoodItem key={good.id} good={good} />
+                    )}
+                  </ol>
                 </details>
               </>
-              )}
-      </main>
+            )}
+        </main>
     </div>
   );
 }

@@ -8,7 +8,6 @@ import tailwindStylesheetUrl from "~/styles/tailwind.css";
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: tailwindStylesheetUrl },
-    { rel: "stylesheet", href: login }
   ];
 };
 
