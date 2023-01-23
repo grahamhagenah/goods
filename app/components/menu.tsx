@@ -153,6 +153,7 @@ export default function CustomizedMenus( props ) {
         </StyledMenu>
         }
         {props.group &&
+        
           <StyledMenu
             id="group-indicator"
             MenuListProps={{
