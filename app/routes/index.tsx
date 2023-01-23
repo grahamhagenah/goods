@@ -1,8 +1,6 @@
 import { Link } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 import { useOptionalUser } from "~/utils";
-import login from "~/styles/login.css";
-import { useRef } from "react";
 import tailwindStylesheetUrl from "~/styles/tailwind.css";
 
 export const links: LinksFunction = () => {
@@ -10,7 +8,6 @@ export const links: LinksFunction = () => {
     { rel: "stylesheet", href: tailwindStylesheetUrl },
   ];
 };
-
 
 export default function Index() {
   const user = useOptionalUser();
