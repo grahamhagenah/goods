@@ -59,3 +59,5 @@ COPY --from=build /myapp/start.sh /myapp/start.sh
 COPY --from=build /myapp/prisma /myapp/prisma
 
 ENTRYPOINT [ "./start.sh" ]
+
+EXPOSE 8080
