@@ -79,6 +79,10 @@ body {
   text-decoration-color: #fff3e6;
 }
 
+#site-title-mobile {
+  display: none;
+}
+
 .logo:active {
   transform: scale(.95);
   transition: .1s;
@@ -185,7 +189,8 @@ footer {
   color: white;
 }
 
-button#logged-in-indicator {
+button#logged-in-indicator,
+button#group-indicator {
   background-color: #f6f6f6;
   text-transform: capitalize;
   font-weight: 600;
@@ -214,11 +219,13 @@ summary::marker {
   margin-right: 10px;
 }
 
-#logged-in-indicator a {
+#logged-in-indicator a,
+#group-indicator a {
   text-decoration: none;
 }
 
-#logged-in-indicator li {
+#logged-in-indicator li,
+#group-indicator li {
   border-radius: 10px;
 }
 
@@ -333,7 +340,16 @@ article {background: var(--c2); border-radius: var(--rc); padding: 1em; box-shad
 @media only screen and (max-width: 600px) {
 
   .logo {
-    height: 2.25rem;
+    height: 2rem;
+  }
+
+  #site-title {
+    display: none;
+  }
+
+  button#logged-in-indicator,
+  button#group-indicator { 
+    font-size: 12px;
   }
 
   nav a {
@@ -347,7 +363,18 @@ article {background: var(--c2); border-radius: var(--rc); padding: 1em; box-shad
   }
 
   .goods-input {
-    padding: 0.6rem 85px 0.6rem 3rem;
+    padding: 0.6rem 30px 0.6rem 3rem;
+  }
+
+  #site-title-mobile {
+    display: block;
+    text-align: left;
+    color: #2b2b2b;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    margin-top: 0;
   }
 
   nav {

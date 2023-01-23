@@ -9,17 +9,12 @@ import { getUserById } from "~/models/user.server";
 import { SlGhost } from 'react-icons/sl';
 import LongMenu from "~/components/dropdown";
 
-// what do i want to do here. I want to get the userId, then get the group of that user and get all items in that group. Possible?
-
 export async function loader({ request }: LoaderArgs) {
   const userId = await requireUserId(request);
   const user = await getUserById(userId);
-  // Get GroupId of this user
   const groupId = await user.groupId
   const allIncompleteGoods = await getAllIncompleteGoods({ groupId });
   const allCompleteGoods = await getAllCompleteGoods({ groupId });
-
-  // const allUsersInGroup = await getAllUsersInGroup({ groupId });
 
   return json({ userId, allIncompleteGoods, allCompleteGoods, user, groupId });
 }
@@ -44,7 +39,6 @@ export async function action({ request }: ActionArgs) {
 
   if(_action === "update") {
     await updateGood({ title, id, userId });
-    await createEmptyGood({ userId, groupId });
   } 
   else if(_action === "create") {
     await createGood({ title, userId, groupId });
@@ -99,7 +93,9 @@ export default function GoodsPage() {
                   <h2>Incomplete</h2>
                   <span className="counter">{data.allCompleteGoods.length}</span>
                   <fetcher.Form method="post" id="clear-items-form">
-                    <button className="clear-all" name="_action" value="clear" type="submit">Clear</button>
+                    <button className="clear-all" name="_action" value="clear" type="submit">
+                     Clear
+                    </button>
                   </fetcher.Form>
                 </summary>
                 <ol>

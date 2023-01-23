@@ -16,7 +16,12 @@ export async function getUserByEmail(email: User["email"]) {
 
 export async function getGroupById(id: Group["id"]) {
   return prisma.group.findUnique(
-    { where: { id } });
+    { where: 
+      { 
+        id 
+      },
+      select: { id: true, users: true, name: true, createdAt: true },
+    });
 }
 
 export function getGroup({ groupId }: {groupId: Group["id"]; }) {

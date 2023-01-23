@@ -57,7 +57,6 @@ export default function NewGoodForm() {
             {actionData.errors.title}
           </div>
         )}
-        
       </div>
     </Form>
   );

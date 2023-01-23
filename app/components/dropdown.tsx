@@ -3,6 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 export default function LongMenu({userName, updatedAt, fetcher, id}) {
 
@@ -43,15 +44,18 @@ export default function LongMenu({userName, updatedAt, fetcher, id}) {
         onClose={handleClose}
         PaperProps={{
           style: {
-            borderRadius: '20px'
+            borderRadius: 20,
+            minWidth: 180,
+            boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
           },
         }}
       >
-        <MenuItem key="delete" onClick={handleDelete}>
+        <MenuItem onClick={handleDelete}>
           Delete
         </MenuItem>
-        <MenuItem key="snfasjafs">
-          Delete
+        <MenuItem>
+          <AccessTimeIcon className="mr-3"/>
+          <p>Edited by <strong>{userName}</strong> at {updatedAt}</p>
         </MenuItem>
       </Menu>
     </div>

@@ -4,6 +4,7 @@ import logo from "public/images/goods-logo.svg";
 import IconMenu from "./menu";
 import { Link } from "@remix-run/react";
 import { getGroup, getGroupById, getUserById } from "~/models/user.server";
+import GroupWorkIcon from '@mui/icons-material/GroupWork';
 
 export const links: LinksFunction = () => {
   return [
@@ -27,9 +28,9 @@ export default function Navbar( props ) {
       <Link to="/goods">
         <img className="logo" src={logo} />
       </Link>
-      <h1 id="site-title">{groupName}</h1>
+      <IconMenu groupName={groupName} group={props.group} /> 
       <div className="nav-items-right">
-        <IconMenu username={props.user.name} /> 
+        <IconMenu username={props.user.name}/> 
       </div>
     </nav>
   )

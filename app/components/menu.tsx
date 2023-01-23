@@ -11,6 +11,11 @@ import { VscKey } from 'react-icons/vsc';
 import { FiLogOut } from 'react-icons/fi';
 import { FiSettings } from 'react-icons/fi';
 import logoOutline from "public/images/goods-icon-outline.svg";
+import GroupWorkIcon from '@mui/icons-material/GroupWork';
+import Divider from '@mui/material/Divider';
+import { FaUserFriends } from 'react-icons/fa';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -52,6 +57,12 @@ const StyledMenu = styled((props: MenuProps) => (
 }));
 
 export default function CustomizedMenus( props ) {
+  let createdAt;
+  if(props.group) {
+    const date = new Date(props.group.createdAt)
+    createdAt = date.toLocaleDateString();
+  }
+  
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -63,65 +74,107 @@ export default function CustomizedMenus( props ) {
 
   return (
     <div>
-      <Button
-        id="logged-in-indicator"
-        aria-controls={open ? 'logged-in-indicator' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        variant="contained"
-        disableElevation
-        onClick={handleClick}
-        endIcon={<KeyboardArrowDownIcon />}
-      >
+      {!props.group &&
+        <Button
+          id="logged-in-indicator"
+          aria-controls={open ? 'logged-in-indicator' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+          variant="contained"
+          disableElevation
+          onClick={handleClick}
+          endIcon={<KeyboardArrowDownIcon />}
+        >
 
-        <AccountCircleIcon className="mr-3"/>
-        {props.username || "Log In"}
+          <AccountCircleIcon className="mr-3"/>
+          {props.username || "Log In"}
+        </Button>
+      }
+      {props.group &&
+          <Button
+          id="group-indicator"
+          aria-controls={open ? 'group-indicator' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+          variant="contained"
+          disableElevation
+          onClick={handleClick}
+          endIcon={<KeyboardArrowDownIcon />}
+        >
 
-      </Button>
-      <StyledMenu
-        id="logged-in-indicator"
-        MenuListProps={{
-          'aria-labelledby': 'logged-in-indicator',
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
-        {props.username &&
-          <Link to="/goods" className="login-button">
+          <FaUserFriends className="mr-3"/>
+          {props.groupName}
+        </Button>
+      }
+      {props.username &&
+        <StyledMenu
+          id="logged-in-indicator"
+          MenuListProps={{
+            'aria-labelledby': 'logged-in-indicator',
+          }}
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+        >
+          {props.username &&
+            <Link to="/goods" className="login-button">
+              <MenuItem onClick={handleClose} disableRipple>
+                <img className="dropdown-icon mr-3" src={logoOutline} />
+                Goods
+              </MenuItem>
+            </Link>
+          }
+          {!props.username &&
+          <Link to="/login" className="login-button">
             <MenuItem onClick={handleClose} disableRipple>
-              <img className="dropdown-icon mr-3" src={logoOutline} />
-              Goods
+              <VscKey className="dropdown-icon mr-3"/>
+              Login
             </MenuItem>
           </Link>
-        }
-         {!props.username &&
-        <Link to="/login" className="login-button">
-          <MenuItem onClick={handleClose} disableRipple>
-            <VscKey className="dropdown-icon mr-3"/>
-            Login
-          </MenuItem>
-        </Link>
-        }
-        {props.username &&
-          <Form action="/logout" method="post">
-            <button type="submit" id="logout-button">
-              <MenuItem onClick={handleClose} disableRipple>
-                <FiLogOut className="dropdown-icon mr-3"/>
-                Logout
-              </MenuItem>
-            </button>
-          </Form>
           }
-        {props.username &&
-        <Link to="/account" className="login-button">
-          <MenuItem onClick={handleClose} disableRipple>
-            <FiSettings className="dropdown-icon mr-3"/>
-            Account
-          </MenuItem>
-        </Link>
+          {props.username &&
+            <Form action="/logout" method="post">
+              <button type="submit" id="logout-button">
+                <MenuItem onClick={handleClose} disableRipple>
+                  <FiLogOut className="dropdown-icon mr-3"/>
+                  Logout
+                </MenuItem>
+              </button>
+            </Form>
+            }
+          {props.username &&
+          <Link to="/account" className="login-button">
+            <MenuItem onClick={handleClose} disableRipple>
+              <FiSettings className="dropdown-icon mr-3"/>
+              Account
+            </MenuItem>
+          </Link>
+          }
+        </StyledMenu>
         }
-      </StyledMenu>
+        {props.group &&
+          <StyledMenu
+            id="group-indicator"
+            MenuListProps={{
+              'aria-labelledby': 'group-indicator',
+            }}
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+          >
+          <MenuItem onClick={handleClose} disableRipple>
+            <CalendarMonthIcon className="dropdown-icon mr-3"/>
+            <p>Created {createdAt}</p> 
+          </MenuItem>
+          <Divider />
+          {props.group.users.map((user) =>
+            <MenuItem key={user.name} onClick={handleClose} disableRipple>
+              <AccountCircleIcon className="dropdown-icon mr-3"/>
+              {user.name}
+            </MenuItem>
+          )}
+        </StyledMenu>
+      }
     </div>
   );
 }
