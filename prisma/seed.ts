@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 async function seed() {
   const email = "rachel@remix.run";
   const name = "Rachel";
+  const surname = "Remix";
 
   // cleanup the existing database
   await prisma.user.delete({ where: { email } }).catch(() => {
@@ -28,6 +29,7 @@ async function seed() {
     data: {
       email,
       name,
+      surname,
       groupId: group.id,
       password: {
         create: {
@@ -41,6 +43,7 @@ async function seed() {
     data: {
       email: "grahamsss@gmail.com",
       name: "Sarah",
+      surname: "Surname",
       groupId: group.id,
       password: {
         create: {

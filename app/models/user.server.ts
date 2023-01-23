@@ -68,7 +68,7 @@ export function updateGroup({ userId, groupId }) {
   });
 }
 
-export async function createUser(email: User["email"], password: string, name: User["name"] ) {
+export async function createUser(email: User["email"], password: string, name: User["name"], surname: User["surname"] ) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const group = await prisma.group.create({
@@ -86,6 +86,7 @@ export async function createUser(email: User["email"], password: string, name: U
         },
       },
       name,
+      surname,
       groupId: group.id,
     },
   });

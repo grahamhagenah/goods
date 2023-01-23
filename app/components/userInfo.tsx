@@ -3,7 +3,6 @@ import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Menu, { MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { BsFillGearFill } from 'react-icons/bs';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Form, Link } from "@remix-run/react";
@@ -11,13 +10,9 @@ import { VscKey } from 'react-icons/vsc';
 import { FiLogOut } from 'react-icons/fi';
 import { FiSettings } from 'react-icons/fi';
 import logoOutline from "public/images/goods-icon-outline.svg";
-import GroupWorkIcon from '@mui/icons-material/GroupWork';
-import Divider from '@mui/material/Divider';
-import { FaUserFriends } from 'react-icons/fa';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 
-const StyledMenu = styled((props: MenuProps) => (
+const UserMenu = styled((props: MenuProps) => (
   <Menu
     elevation={0}
     anchorOrigin={{
@@ -56,13 +51,7 @@ const StyledMenu = styled((props: MenuProps) => (
   },
 }));
 
-export default function CustomizedMenus( props ) {
-  let createdAt;
-  if(props.group) {
-    const date = new Date(props.group.createdAt)
-    createdAt = date.toLocaleDateString();
-  }
-  
+export default function UserInfo( props ) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -74,7 +63,6 @@ export default function CustomizedMenus( props ) {
 
   return (
     <div>
-      {!props.group &&
         <Button
           id="logged-in-indicator"
           aria-controls={open ? 'logged-in-indicator' : undefined}
@@ -83,35 +71,15 @@ export default function CustomizedMenus( props ) {
           variant="contained"
           disableElevation
           onClick={handleClick}
-          endIcon={<KeyboardArrowDownIcon />}
+          endIcon={<KeyboardArrowDownIcon />} 
         >
-
           <AccountCircleIcon className="mr-3"/>
           {props.username || "Log In"}
         </Button>
-      }
-      {props.group &&
-          <Button
-          id="group-indicator"
-          aria-controls={open ? 'group-indicator' : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
-          variant="contained"
-          disableElevation
-          onClick={handleClick}
-          endIcon={<KeyboardArrowDownIcon />}
-        >
 
-          <FaUserFriends className="mr-3"/>
-          {props.groupName}
-        </Button>
-      }
-      {props.username &&
-        <StyledMenu
+        <UserMenu
           id="logged-in-indicator"
-          MenuListProps={{
-            'aria-labelledby': 'logged-in-indicator',
-          }}
+          MenuListProps={{ 'aria-labelledby': 'logged-in-indicator', }}
           anchorEl={anchorEl}
           open={open}
           onClose={handleClose}
@@ -150,32 +118,7 @@ export default function CustomizedMenus( props ) {
             </MenuItem>
           </Link>
           }
-        </StyledMenu>
-        }
-        {props.group &&
-        
-          <StyledMenu
-            id="group-indicator"
-            MenuListProps={{
-              'aria-labelledby': 'group-indicator',
-            }}
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-          >
-          <MenuItem onClick={handleClose} disableRipple>
-            <CalendarMonthIcon className="dropdown-icon mr-3"/>
-            <p>Created {createdAt}</p> 
-          </MenuItem>
-          <Divider />
-          {props.group.users.map((user) =>
-            <MenuItem key={user.name} onClick={handleClose} disableRipple>
-              <AccountCircleIcon className="dropdown-icon mr-3"/>
-              {user.name}
-            </MenuItem>
-          )}
-        </StyledMenu>
-      }
+        </UserMenu>
     </div>
   );
 }

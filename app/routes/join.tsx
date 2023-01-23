@@ -18,6 +18,7 @@ export async function action({ request }: ActionArgs) {
   const formData = await request.formData();
   const email = formData.get("email");
   const name = formData.get("name");
+  const surname = formData.get("surname");
   const password = formData.get("password");
   const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
 
@@ -38,6 +39,13 @@ export async function action({ request }: ActionArgs) {
   if (!name) {
     return json(
       { errors: { email: null, password: "Please include name" } },
+      { status: 400 }
+    );
+  }
+
+  if (!surname) {
+    return json(
+      { errors: { email: null, password: "Please include last name" } },
       { status: 400 }
     );
   }
@@ -64,7 +72,7 @@ export async function action({ request }: ActionArgs) {
 
   const group = await createGroup();
 
-  const user = await createUser(email, password, name, group.id);
+  const user = await createUser(email, password, name, surname, group.id);
 
   return createUserSession({
     request,
@@ -87,6 +95,7 @@ export default function Join() {
   const emailRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
   const nameRef = React.useRef<HTMLInputElement>(null);
+  const surnameRef = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
     if (actionData?.errors?.email) {
@@ -118,7 +127,7 @@ export default function Join() {
                 autoFocus={true}
                 name="name"
                 type="name"
-                autoComplete="name"
+                autocomplete="given-name"
                 aria-invalid={actionData?.errors?.name ? true : undefined}
                 aria-describedby="name-error"
                 className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
@@ -130,7 +139,33 @@ export default function Join() {
               )}
             </div>
           </div>
-
+          <div>
+            <label
+              htmlFor="surname"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Last name
+            </label>
+            <div className="mt-1">
+              <input
+                ref={surnameRef}
+                id="surname"
+                required
+                autoFocus={true}
+                name="surname"
+                type="name"
+                autocomplete="family-name"
+                aria-invalid={actionData?.errors?.surname ? true : undefined}
+                aria-describedby="name-error"
+                className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+              />
+              {actionData?.errors?.surname && (
+                <div className="pt-1 text-red-700" id="email-error">
+                  {actionData.errors.surname}
+                </div>
+              )}
+            </div>
+          </div>
           <div>
             <label
               htmlFor="email"
