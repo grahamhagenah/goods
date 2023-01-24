@@ -76,7 +76,7 @@ export default function GroupInfo( props ) {
           endIcon={<KeyboardArrowDownIcon />}
         >
           <FaUserFriends className="mr-3"/>
-          {props.groupName}
+          <p className="group-name">{props.group.name}</p>
         </Button>
         <GroupMenu
           id="group-indicator"

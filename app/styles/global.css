@@ -70,6 +70,7 @@ nav {
   display: flex;
   justify-content: space-between;
   padding: 0 8rem;
+  align-items: center;
 }
 
 .white-button {
@@ -120,6 +121,12 @@ span.counter {
 
 .nav-items-right ol {
   display: flex;
+}
+
+.group-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
 }
 
 .nav-items-right {
@@ -320,6 +327,10 @@ input, select, textarea {font-size: 1em; color:var(--c4); background: #f6f6f6; b
     letter-spacing: 1px;
     margin-bottom: 25px;
     margin-top: 0;
+  }
+
+  .group-name {
+    max-width: 65px;
   }
 
   nav {
