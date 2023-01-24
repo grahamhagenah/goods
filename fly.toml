@@ -17,7 +17,6 @@ destination = "/data"
 internal_port = 8080
 processes = [ "app" ]
 protocol = "tcp"
-tcp_checks = []
 script_checks = [ ]
 
   [services.concurrency]
@@ -33,6 +32,12 @@ script_checks = [ ]
   [[services.ports]]
   handlers = [ "tls", "http" ]
   port = 443
+
+  [[services.tcp_checks]]
+  grace_period = "1s"
+  interval = "15s"
+  restart_limit = 0
+  timeout = "2s"
 
   [[services.http_checks]]
   interval = "10s"
