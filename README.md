@@ -82,7 +82,7 @@ Prior to your first deployment, you'll need to do a few things:
 - Create two apps on Fly, one for staging and one for production:
 
   ```sh
-  fly apps create scant-goods
+  fly apps create goods
   fly apps create scant-goods-staging
   ```
 
@@ -105,8 +105,7 @@ Prior to your first deployment, you'll need to do a few things:
 - Add a `SESSION_SECRET` to your fly app secrets, to do this you can run the following commands:
 
   ```sh
-  fly secrets set SESSION_SECRET=$(openssl rand -hex 32) --app scant-goods
-  fly secrets set SESSION_SECRET=$(openssl rand -hex 32) --app scant-goods-staging
+  fly secrets set SESSION_SECRET=$(openssl rand -hex 32) --app goods
   ```
 
   If you don't have openssl installed, you can also use [1password](https://1password.com/password-generator/) to generate a random secret, just replace `$(openssl rand -hex 32)` with the generated secret.
