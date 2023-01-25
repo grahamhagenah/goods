@@ -6,6 +6,8 @@ import { updateGood, createGood, deleteGood, markComplete, markIncomplete } from
 import { getUserById } from "~/models/user.server";
 import { SlGhost } from 'react-icons/sl';
 import LongMenu from "~/components/dropdown";
+import { Oval } from  'react-loader-spinner'
+import { useState } from "react";
 
 export async function loader({ request }: LoaderArgs) {
   const userId = await requireUserId(request);
@@ -85,9 +87,9 @@ export default function GoodsPage() {
                 <></>
               ) : (
               <>
-                <details className="incomplete-goods" open>
+                <details className="complete-goods" open>
                   <summary>
-                    <h2>Incomplete</h2>
+                    <h2>Complete</h2>
                     <span className="counter">{data.allCompleteGoods.length}</span>
                     <fetcher.Form method="post" id="clear-items-form">
                       <button className="clear-all" name="_action" value="clear" type="submit">
@@ -113,7 +115,7 @@ function GoodItem ({ good }) {
   const userName = good.user.name
   const date = new Date(good.updatedAt)
   const updatedAt = date.toLocaleDateString() + ", " + date.toLocaleTimeString()
-
+  const [submitting, setSubmitting] = useState(false);
   const fetcher = useFetcher();
 
   const checked = fetcher.submission
@@ -124,9 +126,16 @@ function GoodItem ({ good }) {
 
   const actionValue = checked ? "restore" : "complete";
 
+  function handleUpdate() {
+    setSubmitting(true)
+    setTimeout(() => {
+      setSubmitting(false)
+    }, 1000)
+  }
+
   return (
-    <li>
-      <fetcher.Form method="post" className="item-form">
+    <li key={good.id}>
+      <fetcher.Form method="post" className="item-form" id={'goods-input-' + good.id} onSubmit={handleUpdate}>
           <input type="hidden" name="id" value={good.id}></input>
           <label className="form-control">
             <input
@@ -140,6 +149,27 @@ function GoodItem ({ good }) {
           <input name="title" type="text" defaultValue={good.title} className="goods-input"></input>
           <button name="_action" value="update" type="submit" className="update-button">Update</button>
           <LongMenu userName={userName} updatedAt={updatedAt} fetcher={fetcher} id={good.id}/>
+          {submitting &&
+            <Oval
+              height={20}
+              width={80}
+              color="#fe9900"
+              wrapperStyle={{ 
+                position: 'absolute',
+                right: '0',
+                height: '100%',
+                alignItems: 'center',
+                width: '2.5rem',
+                borderRadius: '10px',
+              }}
+              wrapperClass="loading-oval"
+              visible={true}
+              ariaLabel='oval-loading'
+              secondaryColor="#fe990085"
+              strokeWidth={10}
+              strokeWidthSecondary={10}
+            />
+          }
       </fetcher.Form>
     </li>
 )}

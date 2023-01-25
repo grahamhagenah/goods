@@ -127,7 +127,7 @@ input[type="checkbox"]:checked::before {
 .goods-input:focus,
 main form input:focus
  {
-  background-color: #fe99001f;
+  background-color: #fff2de;
 }
 
 #site-title {

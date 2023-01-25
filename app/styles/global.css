@@ -73,6 +73,14 @@ nav {
   align-items: center;
 }
 
+.loading-oval svg {
+  background-color: #f6f6f6;
+}
+
+.goods-input:focus ~ .loading-oval svg {
+  background-color: #fff2de;
+}
+
 .white-button {
   border-radius: .375rem;
   background-color: white;
