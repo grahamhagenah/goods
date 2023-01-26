@@ -1,12 +1,9 @@
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { getUserId } from "~/session.server";
-import { getGroupById, getUserById, updateGroupName, updateUserDetails } from "~/models/user.server";
+import { getUserById, updateUserDetails } from "~/models/user.server";
 import { useLoaderData } from "@remix-run/react";
 import { Form } from "@remix-run/react";
-import { updateGroup } from "~/models/user.server";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { userInfo } from "os";
 
 export async function loader({ request }: LoaderArgs) {
   const userId = await getUserId(request);
