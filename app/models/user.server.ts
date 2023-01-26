@@ -59,6 +59,16 @@ export function updateGroup({ userId, groupId }) {
   });
 }
 
+export function updateUserDetails(userId, name, surname) {
+  return prisma.user.update({
+    data: { 
+      name: name,
+      surname: surname,
+    },
+    where: { id: userId },
+  });
+}
+
 export async function createUser(email: User["email"], password: string, name: User["name"], surname: User["surname"]) {
   const hashedPassword = await bcrypt.hash(password, 10);
 

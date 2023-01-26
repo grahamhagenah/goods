@@ -8,6 +8,7 @@ import { SlGhost } from 'react-icons/sl';
 import LongMenu from "~/components/dropdown";
 import { Oval } from  'react-loader-spinner'
 import { useState } from "react";
+import moment from "moment";
 
 export async function loader({ request }: LoaderArgs) {
   const userId = await requireUserId(request);
@@ -114,7 +115,8 @@ function GoodItem ({ good }) {
 
   const userName = good.user.name
   const date = new Date(good.updatedAt)
-  const updatedAt = date.toLocaleDateString() + ", " + date.toLocaleTimeString()
+  const updatedAt = moment(date).fromNow() 
+  
   const [submitting, setSubmitting] = useState(false);
   const fetcher = useFetcher();
 

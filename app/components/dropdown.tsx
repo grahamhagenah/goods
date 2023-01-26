@@ -3,7 +3,8 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function LongMenu({userName, updatedAt, fetcher, id}) {
 
@@ -51,11 +52,12 @@ export default function LongMenu({userName, updatedAt, fetcher, id}) {
         }}
       >
         <MenuItem onClick={handleDelete}>
-          Delete
+          <DeleteIcon className="mr-3 dropdown-icon-larger"/>
+          Delete Item
         </MenuItem>
         <MenuItem>
-          <AccessTimeIcon className="mr-3"/>
-          <p>Edited by <strong>{userName}</strong> at {updatedAt}</p>
+          <EditIcon className="mr-3 dropdown-icon-larger"/>
+          <p><strong>{userName}</strong>, {updatedAt}</p>
         </MenuItem>
       </Menu>
     </div>

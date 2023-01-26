@@ -10,6 +10,9 @@ import { VscKey } from 'react-icons/vsc';
 import { FiLogOut } from 'react-icons/fi';
 import { FiSettings } from 'react-icons/fi';
 import logoOutline from "public/images/goods-icon-outline.svg";
+import Divider from '@mui/material/Divider';
+import { FaUserFriends } from 'react-icons/fa';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 
 const UserMenu = styled((props: MenuProps) => (
@@ -84,6 +87,17 @@ export default function UserInfo( props ) {
           open={open}
           onClose={handleClose}
         >
+          {props.username &&
+          <div>
+            <Link to="/group" className="login-button">
+              <MenuItem onClick={handleClose} disableRipple>
+                <FaUserFriends className="mr-3"/>
+                <p className="group-name">{props.group.name}</p>
+              </MenuItem>
+            </Link>
+            <Divider className="my-1" sx={{ margin: "5px" }}/>
+           </div>
+          }
           {props.username &&
             <Link to="/goods" className="login-button">
               <MenuItem onClick={handleClose} disableRipple>

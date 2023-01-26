@@ -23,6 +23,10 @@ body {
   outline-color: #fe9900;
 }
 
+main {
+  height: 75vh;
+}
+
 #main-form {
   padding: .75rem 0 .75rem 3rem;
   border-radius: 4px;
@@ -111,7 +115,16 @@ span.counter {
   font-size: 10px;
   text-transform: uppercase;
   font-weight: 700;
-  padding: 0 8px 2px 8px;
+  padding: 8px;
+  line-height: 1;
+}
+
+#clear-items-form:hover {
+  background-color: #2b2b2b;
+}
+
+#clear-items-form:hover button {
+  color: white;
 }
 
 .white-button:hover {
@@ -129,12 +142,6 @@ span.counter {
 
 .nav-items-right ol {
   display: flex;
-}
-
-.group-name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: clip;
 }
 
 .nav-items-right {
@@ -158,21 +165,6 @@ footer {
   bottom: 0;
   width: 100%;
   height: 2.5rem; 
-}
-
-.example-menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: inline-flex;
-  flex-direction: row;
-  background: #ffffff;
-  border: solid 2px #000000;
-
-}
-
-.example-dropdown {
-  position: relative;
 }
 
 .primary-button {
@@ -261,30 +253,30 @@ main {
   color: #2b2b2b;
 }
 
-.example-dropdown:focus-within > ul {
-  display: flex;
-}
-
-.example-menu a {
-  display: inline-block;
-  padding: 0.5rem;
-}
-
-.example-dropdown > a {
-  display: inline-block;
-  padding: 1rem;
-  color: #000000;
-}
-
-.example-dropdown > a::after {
-  content: " \2193"
-}
-
 .dropdown-icon {
   max-width: 1rem;
   border-radius: 0;
   opacity: .8;
   color: #2b2b2b;
+}
+
+.dropdown-icon-larger {
+  max-width: 1.25rem;
+  border-radius: 0;
+  opacity: .8;
+  color: #2b2b2b;
+}
+
+.user-list .user {
+  background-color: #fe99001f;
+  text-transform: capitalize;
+  font-weight: 600;
+  border-radius: 100px;
+  padding: 5px 15px;
+  color: #2b2b2b;
+  display: inline-block;
+  margin: 3px;
+  font-size: 13px;
 }
 
 img, iframe {border: none; max-width: 100%}
@@ -300,7 +292,7 @@ input, select, textarea {font-size: 1em; color:var(--c4); background: #f6f6f6; b
 @media only screen and (max-width: 600px) {
 
   .logo {
-    height: 2rem;
+    height: 3rem;
   }
 
   #site-title {
@@ -335,10 +327,6 @@ input, select, textarea {font-size: 1em; color:var(--c4); background: #f6f6f6; b
     letter-spacing: 1px;
     margin-bottom: 25px;
     margin-top: 0;
-  }
-
-  .group-name {
-    max-width: 65px;
   }
 
   nav {
