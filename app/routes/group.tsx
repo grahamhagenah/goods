@@ -45,8 +45,8 @@ export default function AccountDetailsPage() {
 
   return (
     <div className="flex min-h-full flex-col justify-center">
-      <div className="mx-auto w-full max-w-md px-8">
-        <h1 className="mb-8 text-2xl font-bold">{data.group.name}</h1>
+      <div className="mx-auto w-full px-8">
+        <h1 className="mb-8">{data.group.name}</h1>
         <ul className="user-list mb-8 mt-0">
           <h3 className="block text-sm font-medium text-gray-700 mb-2">Group Users</h3>
           {data.group.users.map((user) =>
@@ -58,10 +58,7 @@ export default function AccountDetailsPage() {
         </ul>
       <Form method="post" className="space-y-6">
       <div className="mb-8 mt-0">
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
           <h3>Group ID </h3>
           <p className="mb-3">Share this Group ID with someone or update your ID</p>
         </label>
@@ -75,14 +72,11 @@ export default function AccountDetailsPage() {
               defaultValue={data.user.groupId}
               className="w-full rounded border border-gray-500 px-2 py-1 text-lg mb-5"
             />
-            <button type="submit" name="_action" value="updateGroupId" className="primary-button w-full rounded py-2 px-4 text-white">Update Group ID</button>
+            <button type="submit" name="_action" value="updateGroupId" className="primary-button rounded py-2 px-4 text-white">Update Group ID</button>
           </div>
         </div>
         <div className="mb-8 mt-0">
-        <label
-          htmlFor="name"
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="name" className="block text-sm font-medium text-gray-700">
           <h3>Group Name </h3>
         </label>
         <div className="mt-1">
@@ -95,7 +89,7 @@ export default function AccountDetailsPage() {
             defaultValue={data.group.name}
             className="w-full rounded border border-gray-500 px-2 py-1 text-lg mb-5"
           />
-          <button type="submit" name="_action" value="updateGroupName" className="primary-button w-full rounded py-2 px-4 text-white">Update Group Name</button>
+          <button type="submit" name="_action" value="updateGroupName" className="primary-button rounded py-2 px-4 text-white">Update Group Name</button>
         </div>
       </div>
     </Form>

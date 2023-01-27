@@ -32,7 +32,7 @@ export default function AccountDetailsPage() {
 
   return (
     <div className="flex min-h-full flex-col justify-center">
-      <div className="mx-auto w-full max-w-md px-8">
+      <div className="mx-auto w-full px-8">
       <h1 className="mb-8 text-2xl font-bold">Account Details</h1>
       <Form method="post" className="space-y-6">
         <div className="mt-1">
@@ -46,7 +46,7 @@ export default function AccountDetailsPage() {
             name="username"
             type="text"
             defaultValue={data.user.name}
-            className="w-full rounded border border-gray-500 px-2 py-1 text-lg mb-5 mt-1"
+            className="w-full rounded border border-gray-500 px-2 py-1 text-lg mt-1"
           />
         </div>
         <div className="mt-1">
@@ -60,10 +60,10 @@ export default function AccountDetailsPage() {
             name="surname"
             type="text"
             defaultValue={data.user.surname}
-            className="w-full rounded border border-gray-500 px-2 py-1 text-lg mb-5 mt-1"
+            className="w-full rounded border border-gray-500 px-2 py-1 text-lg mt-1"
           />
         </div>
-          <button type="submit" name="_action" value="updateUserDetails" className="primary-button w-full rounded py-2 px-4 text-white">Update Details</button>
+          <button type="submit" name="_action" value="updateUserDetails" className="primary-button rounded py-2 px-4 text-white">Update Details</button>
       </Form>
     </div>
   </div>
