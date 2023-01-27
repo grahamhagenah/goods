@@ -65,7 +65,7 @@ export default function GoodsPage() {
   const fetcher = useFetcher();
   
   return (
-    <div className="flex flex-col md:pt-0 lg:pt-16 mt-16">
+    <div className="flex flex-col md:pt-0">
       <main>
         <Outlet />
           <details className="incomplete-goods" open>

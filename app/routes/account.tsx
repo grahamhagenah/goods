@@ -31,7 +31,7 @@ export default function AccountDetailsPage() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className="flex min-h-full flex-col justify-center pt-16 mt-16">
+    <div className="flex min-h-full flex-col justify-center">
       <div className="mx-auto w-full max-w-md px-8">
       <h1 className="mb-8 text-2xl font-bold">Account Details</h1>
       <Form method="post" className="space-y-6">
