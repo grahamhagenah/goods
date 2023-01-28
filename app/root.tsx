@@ -13,7 +13,7 @@ import {
 import Navbar from "~/components/navbar"
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import styles from "~/styles/global.css";
-import { getUser, getUserId, requireUserId } from "./session.server";
+import { getUser } from "./session.server";
 import { getGroup, getGroupById, getUserById } from "./models/user.server";
 import Footer from "./components/footer";
 
