@@ -171,7 +171,7 @@ footer {
 
 #content-wrap {
   padding: 2.5rem 0; 
-  margin: 0 30%;
+  margin: 0 25%;
 }
 
 #footer {
@@ -353,6 +353,10 @@ input, select, textarea {font-size: 1em; color:var(--c4); background: #f6f6f6; b
 
   nav {
     padding: 0 15px;
+  }
+
+  #content-wrap {
+    margin: 0 15px;
   }
 
   .nav-items-right {

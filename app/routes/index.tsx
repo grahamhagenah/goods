@@ -12,12 +12,12 @@ export const links: LinksFunction = () => {
 export default function Index() {
   const user = useOptionalUser();
   return (
-    <main className="relative sm:flex sm:items-center sm:justify-center">
+    <main className="relative">
       <div className="relative sm:pb-16 sm:pt-8">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="relative">
             <div className="relative px-4 pt-16 pb-8 sm:px-6 sm:pt-24 sm:pb-14 lg:px-8 lg:pb-20">
-              <h1 className="main-title text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl">
+              <h1 className="main-title text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-8xl">
                 <span className="block">
                   Scant Goods
                 </span>
