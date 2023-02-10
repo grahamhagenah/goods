@@ -2,6 +2,7 @@ import { Link } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 import { useOptionalUser } from "~/utils";
 import tailwindStylesheetUrl from "~/styles/tailwind.css";
+import Footer from "~/components/footer";
 
 export const links: LinksFunction = () => {
   return [
@@ -54,6 +55,7 @@ export default function Index() {
           </div>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

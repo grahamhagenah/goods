@@ -142,8 +142,8 @@ textarea {
 }
 
 .incomplete-goods,
-.completed-goods {
-  margin-bottom: 2rem;
+.complete-goods {
+  padding-bottom: 2rem;
 }
 
 .plus-sign {
@@ -232,7 +232,7 @@ input, select, textarea {
 @media only screen and (max-width: 600px) {
 
   main {
-    margin: 0 15px;
+    margin: 0;
   }
 
   [type=checkbox] {

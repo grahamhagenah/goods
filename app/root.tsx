@@ -66,7 +66,6 @@ export default function App() {
             <Scripts />
             <LiveReload />
           </div>
-          <Footer />
         </div>
       </body>
     </html>

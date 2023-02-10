@@ -51,10 +51,10 @@ export async function action({ request }: ActionArgs) {
     await deleteGood({ id });
   }
   else if(_action === "complete") {
-    await markComplete({ id });
+    await markComplete({ id, userId });
   }
   else if("restore") {
-    await markIncomplete({ id });
+    await markIncomplete({ id, userId });
   }
   
   return null;
