@@ -15,7 +15,6 @@ import tailwindStylesheetUrl from "./styles/tailwind.css";
 import styles from "~/styles/global.css";
 import { getUser } from "./session.server";
 import { getGroup, getGroupById, getUserById } from "./models/user.server";
-import Footer from "./components/footer";
 
 export const links: LinksFunction = () => {
   return [
@@ -67,7 +66,6 @@ export default function App() {
             <LiveReload />
           </div>
         </div>
-        <Footer/>
       </body>
     </html>
   );

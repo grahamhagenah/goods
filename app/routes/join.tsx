@@ -7,6 +7,7 @@ import { getUserId, createUserSession } from "~/session.server";
 
 import {createUser, getUserByEmail } from "~/models/user.server";
 import { safeRedirect, validateEmail } from "~/utils";
+import Footer from "~/components/footer";
 
 export async function loader({ request }: LoaderArgs) {
   const userId = await getUserId(request);
@@ -241,6 +242,7 @@ export default function Join() {
           </div>
         </Form>
       </div>
+      <Footer/>
     </div>
   );
 }
