@@ -45,7 +45,7 @@ export default function AccountDetailsPage() {
 
   return (
     <div className="flex min-h-full flex-col justify-center">
-      <div className="mx-auto w-full px-8">
+      <div className="account-settings mx-auto w-full px-8">
         <h1 className="mb-8">{data.group.name}</h1>
         <ul className="user-list mb-8 mt-0">
           <h3 className="block text-sm font-medium text-gray-700 mb-2">Group Users</h3>

@@ -32,22 +32,22 @@ export default function AccountDetailsPage() {
 
   return (
     <div className="flex min-h-full flex-col justify-center">
-      <div className="mx-auto w-full px-8">
-      <h1 className="mb-8 text-2xl font-bold">Account Details</h1>
-      <Form method="post" className="space-y-6">
-        <div className="mt-1">
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-          <h3>First Name</h3>
-        </label>
-          <input
-            id="username"
-            required
-            autoFocus={true}
-            name="username"
-            type="text"
-            defaultValue={data.user.name}
-            className="w-full rounded border border-gray-500 px-2 py-1 text-lg mt-1"
-          />
+      <div className="account-settings mx-auto w-full px-8">
+        <h1 className="mb-8 text-2xl font-bold">Account Details</h1>
+        <Form method="post" className="space-y-6">
+          <div className="mt-1">
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            <h3>First Name</h3>
+          </label>
+            <input
+              id="username"
+              required
+              autoFocus={true}
+              name="username"
+              type="text"
+              defaultValue={data.user.name}
+              className="w-full rounded border border-gray-500 px-2 py-1 text-lg mt-1"
+            />
         </div>
         <div className="mt-1">
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">

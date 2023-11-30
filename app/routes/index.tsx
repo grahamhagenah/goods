@@ -13,7 +13,7 @@ export const links: LinksFunction = () => {
 export default function Index() {
   const user = useOptionalUser();
   return (
-    <main className="relative">
+    <main>
       <div className="relative sm:pb-16 sm:pt-8">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="relative">
